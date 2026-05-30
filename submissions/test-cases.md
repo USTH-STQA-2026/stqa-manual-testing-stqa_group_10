@@ -93,13 +93,19 @@
 
 
 ### REQ-06
-
+| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
+|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
+| TC-18 | Kiểm tra sách quá hạn| Phiếu mượn có `dueDate` ≤ ngày hiện tại | 1.Đăng nhập bằng tài khoản thủ thư <br><br>2.Chọn tab 'Mượn trả'<br><br>3.Bấm nút 'Kiểm tra sách quá hạn' | Tài khoản thủ thư | 1.Thông báo 'đã cập nhật: XX' sách quá hạn <br><br>2.Trạng thái sách chuyển từ 'đang mượn' thành 'quá hạn' | REQ-06 | |
+| TC-19 | Thành viên thấy phiếu của mình nếu quá hạn | Phiếu mượn có `dueDate` ≤ ngày hiện tại | 1.Đăng nhập bằng tài khoản thành viên <br><br>2.Chọn tab 'Mượn trả' | Tài khoản thành viên | Trạng thái sách đang mượn chuyển từ 'đang mượn' thành 'quá hạn'| REQ-06 | |
 
 ### REQ-07
 
 
-### REQ-08
-
+### REQ-08 - Tra cứu phiếu mượn
+| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
+|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
+| TC-29 | Thủ thư xem tất cả phiếu mượn của mọi thành viên | Thành viên mượn sách từ thư viện | 1.Đăng nhập bằng tài khoản thủ thư<br><br>2.Chọn tab 'mượn trả' | Tài khoản thủ thư | Tab 'tất cả phiếu mượn' sẽ hiện ra danh sách phiếu mượn với tên sách, tên người mượn, ngày mượn, hạn trả, và trạng thái mượn của sách. | REQ-08 | |
+| TC-30 | Thành viên xem tất cả các phiếu mượn sách của mình | Thành viên mượn sách từ thư viện | 1.Đăng nhập bằng tài khoản thành viên<br><br>2. Chọn tab 'mượn trả' | Tài khoản thành viên | Tab 'phiếu mượn của tôi' sẽ hiện tất cả những phiếu sách mà chỉ có sách mà thành viên đang đăng nhập mượn có với tên sách, mã phiếu, tên thành viên, ngày mượn và hạn trả, và trạng thái sách. | REQ-08 | |
 
 
 ## Tổng hợp
