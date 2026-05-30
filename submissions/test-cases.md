@@ -1,208 +1,198 @@
-# Test Cases — Bảng trường hợp kiểm thử
+# Test Cases — Test Case Table
 
-| Thông tin | |
+| Information | |
 |---|---|
-| **Nhóm** | Nhóm 10 |
-| **Ngày tạo** | 26/05/2026 |
-| **Hệ thống** | https://stqa.rbc.vn |
-| **Tham chiếu** | SRS v1.0 |
+| **Team** | Team 10 |
+| **Creation Date** | 26/05/2026 |
+| **System** | https://stqa.rbc.vn |
+| **Reference** | SRS v1.0 |
 
 ---
 
-## Bước 1: Mô hình hóa miền đầu vào — Input Domain Modeling (IDM)
+## Step 1: Input Domain Modeling (IDM)
 
-> 📖 **Textbook:** Chương 6 — *Input Domain Modeling*, Paul Ammann & Jeff Offutt.
+> 📖 **Textbook:** Chapter 6 — *Input Domain Modeling*, Paul Ammann & Jeff Offutt.
 >
-> **Trước khi viết Test Case**, nhóm **phải** phân tích miền đầu vào bằng bảng IDM bên dưới.
-> Mỗi chức năng cần xác định: **Đặc tính (Characteristic)**, **Phân vùng (Block/Partition)**, và **Giá trị đại diện (Value)**.
+> **Before writing Test Cases**, the team **must** analyze the input domain using the IDM table below.
+> Each function needs to define: **Characteristic**, **Block/Partition**, and **Representative Value**.
 
-# Test Cases — Bảng trường hợp kiểm thử
+### IDM - REQ-01: Login
 
-| Thông tin | |
-|---|---|
-| **Nhóm** | Nhóm 10 |
-| **Ngày tạo** | 26/05/2026 |
-| **Hệ thống** | https://stqa.rbc.vn |
-| **Tham chiếu** | SRS v1.0 |
-
-
-### IDM - REQ-01: Đăng nhập (Login)
-
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Email tồn tại trong DB? | Có | `librarian@library.com` | Đăng nhập thành công |
-| | Không | `noone@email.com` | Báo lỗi "Tài khoản không tồn tại" |
-| Mật khẩu đúng? | Đúng | `admin123` | Đăng nhập thành công |
-| | Sai | `wrongpass` | Báo lỗi "Mật khẩu không đúng" |
-| Ô nhập có rỗng? | Không rỗng | (bất kỳ) | Xử lý bình thường |
-| | Rỗng | `""` | Báo lỗi "Vui lòng nhập email và mật khẩu" |
+| Email exists in DB? | Yes | `librarian@library.com` | Login successful |
+| | No | `noone@email.com` | Error: "Account does not exist" |
+| Password correct? | Correct | `admin123` | Login successful |
+| | Incorrect | `wrongpass` | Error: "Incorrect password" |
+| Input field empty? | Not empty | (Any) | Normal processing |
+| | Empty | `""` | Error: "Please enter email and password" |
 
 ---
 
-### IDM - REQ-02: Xem danh sách sách (View Book List)
+### IDM - REQ-02: View Book List
 
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Vai trò tài khoản? | Thủ thư | `librarian@library.com` | Xem toàn bộ sách với đầy đủ chi tiết |
-| | Thành viên | `ba.nguyen@email.com` | Xem toàn bộ sách với đầy đủ chi tiết |
-| Trạng thái sách? | Có sẵn | BOOK001, BOOK002 | Hiển thị "Có sẵn" |
-| | Đã mượn | BOOK003 | Hiển thị "Đã mượn" |
-| | Thất lạc | BOOK007 | Hiển thị "Thất lạc" |
-| Thông tin đầy đủ? | Đủ 5 trường | BOOK001 | Hiện Tên, Tác giả, Thể loại, Năm, Trạng thái |
-| Cập nhật realtime? | Sau khi mượn | Mượn BOOK001 | Trạng thái lập tức đổi thành "Đã mượn" |
-| | Sau khi trả | Trả BOOK003 | Trạng thái lập tức đổi thành "Có sẵn" |
+| Account Role? | Librarian | `librarian@library.com` | View all books with full details |
+| | Member | `ba.nguyen@email.com` | View all books with full details |
+| Book Status? | Available | BOOK001, BOOK002 | Display "Available" |
+| | Borrowed | BOOK003 | Display "Borrowed" |
+| | Lost | BOOK007 | Display "Lost" |
+| Information complete? | All 5 fields | BOOK001 | Show Title, Author, Category, Year, Status |
+| Real-time update? | After borrowing | Borrow BOOK001 | Status immediately changes to "Borrowed" |
+| | After returning | Return BOOK003 | Status immediately changes to "Available" |
 
 ---
 
-### IDM - REQ-03: Tìm kiếm và lọc sách (Search & Filter)
+### IDM - REQ-03: Search & Filter
 
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Từ khóa tồn tại? | Có (Tên sách) | `"Flutter"` | Hiện các sách chứa chữ "Flutter" |
-| | Có (Tác giả) | `"Nguyễn"` | Hiện sách của tác giả "Nguyễn" |
-| | Không | `"XYZ123"` | Báo "Không tìm thấy sách" |
-| Phân biệt hoa/thường? | Chữ thường | `"flutter"` | Kết quả khớp với "Flutter" |
-| | Chữ hoa | `"FLUTTER"` | Kết quả khớp với "Flutter" |
-| Lọc theo thể loại? | Thể loại có sách | Chọn `"Công nghệ"` | Chỉ hiện sách Công nghệ |
-| | Thể loại không sách| Bỏ trống/Không có | Báo "Không tìm thấy sách" |
+| Keyword exists? | Yes (Book Title) | `"Flutter"` | Show books containing "Flutter" |
+| | Yes (Author) | `"Nguyễn"` | Show books by author "Nguyễn" |
+| | No | `"XYZ123"` | Display "Book not found" |
+| Case-sensitive? | Lowercase | `"flutter"` | Results match "Flutter" |
+| | Uppercase | `"FLUTTER"` | Results match "Flutter" |
+| Filter by category? | Category with books | Select `"Technology"` | Show Technology books only |
+| | Category without books| Empty/None | Display "Book not found" |
 
 ---
 
-### IDM - REQ-04: Mượn sách (Borrow Book)
+### IDM - REQ-04: Borrow Book
 
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Trạng thái sách? | Có sẵn | BOOK001 | Cho phép mượn |
-| | Đã mượn | BOOK003 | Từ chối, báo lỗi |
-| | Thất lạc | BOOK007 | Từ chối, báo lỗi |
-| Trạng thái thành viên? | Hoạt động | MEM002 | Cho phép mượn |
-| | Tạm ngưng | MEM004 | Từ chối, báo lỗi tài khoản tạm ngưng |
-| | Hết hạn | MEM005 | Từ chối, báo lỗi tài khoản hết hạn |
-| Số sách đang mượn? | < 3 | MEM006 (1 cuốn) | Cho phép mượn |
-| | = 3 | MEM mượn đủ 3 cuốn| Từ chối, báo lỗi vượt giới hạn |
+| Book Status? | Available | BOOK001 | Allow borrowing |
+| | Borrowed | BOOK003 | Rejected, display error message |
+| | Lost | BOOK007 | Rejected, display error message |
+| Member Status? | Active | MEM002 | Allow borrowing |
+| | Suspended | MEM004 | Rejected, error: account suspended |
+| | Expired | MEM005 | Rejected, error: account expired |
+| Number of borrowed books?| < 3 | MEM006 (1 book) | Allow borrowing |
+| | = 3 | Member borrowed 3 books| Rejected, error: limit exceeded |
 
 ---
 
-### IDM - REQ-05: Trả sách (Return Book)
+### IDM - REQ-05: Return Book
 
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Phiếu thuộc về user? | Phải | MEM002 trả BOOK003 | Cho phép trả |
-| | Không | MEM002 trả BOOK013 | Ẩn tùy chọn trả / Từ chối |
-| Tình trạng thời gian? | Trong hạn | BR003 | Trả thành công, không cảnh báo |
-| | Quá hạn | BR001 | Trả thành công **và** hiện cảnh báo quá hạn |
-| | Đã trả | BR002 | Ẩn tùy chọn trả |
-| Trạng thái sách sau trả?| Thành công | BOOK003 | Đổi thành "Có sẵn" |
-| Trạng thái phiếu sau trả?| Thành công | BR001 | Đổi thành "Đã trả" |
+| Receipt belongs to user?| Yes | MEM002 returns BOOK003 | Allow return |
+| | No | MEM002 returns BOOK013 | Hide return option / Rejected |
+| Time Status? | Within due date | BR003 | Returned successfully, no warning |
+| | Overdue | BR001 | Returned successfully **and** show overdue warning |
+| | Already returned | BR002 | Hide return option |
+| Book status after return?| Success | BOOK003 | Changes to "Available" |
+| Receipt status after return?| Success | BR001 | Changes to "Returned" |
 
 ---
 
-### IDM - REQ-06: Xử lý sách quá hạn (Overdue Handling)
+### IDM - REQ-06: Overdue Handling
 
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Người kích hoạt? | Thủ thư | `librarian@library.com` | Quét và cập nhật phiếu quá hạn |
-| | Thành viên | Mọi thành viên | Ẩn nút chức năng này |
-| Ngày hiện tại vs Hạn? | Trước hạn | Hôm nay < Hạn trả | Giữ nguyên trạng thái "Đang mượn" |
-| | Đúng hạn | Hôm nay = Hạn trả | Đánh dấu "Quá hạn" |
-| | Sau hạn | Hôm nay > Hạn trả | Đánh dấu "Quá hạn" |
-| Thành viên xem quá hạn? | Có phiếu quá hạn | MEM002 | Thấy BR001 bị "Quá hạn" |
-| | Không có | MEM006 | Không thấy phiếu nào quá hạn |
-| Thủ thư xem quá hạn? | Sau khi quét | Thủ thư | Thấy **tất cả** phiếu quá hạn |
+| Triggered by? | Librarian | `librarian@library.com` | Scan and update overdue receipts |
+| | Member | Any member | Hide this functional button |
+| Current Date vs Due Date?| Before due date | Today < Due Date | Maintain "Borrowed" status |
+| | On due date | Today = Due Date | Mark as "Overdue" |
+| | After due date | Today > Due Date | Mark as "Overdue" |
+| Member views overdue? | Has overdue receipt | MEM002 | Sees BR001 marked as "Overdue" |
+| | None | MEM006 | No overdue receipts displayed |
+| Librarian views overdue?| After scanning | Librarian | Sees **all** overdue receipts |
 
 ---
 
-### IDM - REQ-07: Quản lý thành viên (Add New)
+### IDM - REQ-07: Member Management (Add New)
 
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Vai trò thực hiện? | Thủ thư | `librarian@library.com` | Hiện form, thực hiện được |
-| | Thành viên | `ba.nguyen@email.com` | Ẩn tab "Thành viên" |
-| Email hợp lệ? | Hợp lệ | `new@email.com` | Chấp nhận |
-| | Thiếu `.` ở domain | `new@domain` | Từ chối, báo email không hợp lệ |
-| | Thiếu `@` | `newdomain.com` | Từ chối, báo email không hợp lệ |
-| | Rỗng | `""` | Từ chối, báo lỗi bắt buộc nhập |
-| Email duy nhất? | Chưa tồn tại | `brandnew@email.com` | Thêm thành công |
-| | Đã tồn tại | `ba.nguyen@email.com` | Từ chối, báo email đã tồn tại |
-| Nhập họ tên? | Đã nhập | `"Nguyễn Văn A"` | Chấp nhận |
-| | Rỗng | `""` | Từ chối, báo lỗi bắt buộc nhập |
-| Nhập SĐT? | Đã nhập | `"0912345678"` | Chấp nhận |
-| | Rỗng | `""` | Từ chối, báo lỗi bắt buộc nhập |
+| Executed by role? | Librarian | `librarian@library.com` | Show form, execution permitted |
+| | Member | `ba.nguyen@email.com` | Hide "Member" tab |
+| Email valid? | Valid | `new@email.com` | Accepted |
+| | Missing `.` in domain| `new@domain` | Rejected, error: invalid email |
+| | Missing `@` | `newdomain.com` | Rejected, error: invalid email |
+| | Empty | `""` | Rejected, error: required field |
+| Email unique? | Does not exist | `brandnew@email.com` | Added successfully |
+| | Already exists | `ba.nguyen@email.com` | Rejected, error: email already exists |
+| Input Full Name? | Entered | `"Nguyễn Văn A"` | Accepted |
+| | Empty | `""` | Rejected, error: required field |
+| Input Phone Number? | Entered | `"0912345678"` | Accepted |
+| | Empty | `""` | Rejected, error: required field |
 
 ---
 
-### IDM - REQ-08: Tra cứu phiếu mượn (Borrow Receipt Lookup)
+### IDM - REQ-08: Borrow Receipt Lookup
 
-| Đặc tính | Phân vùng | Giá trị đại diện | Kết quả mong đợi |
+| Characteristic | Partition | Representative Value | Expected Result |
 |---|---|---|---|
-| Vai trò tra cứu? | Thủ thư | `librarian@library.com` | Xem được **toàn bộ** phiếu |
-| | Thành viên | `ba.nguyen@email.com` | Chỉ xem được phiếu của MEM002 |
-| Xem của người khác? | Cố ý tra cứu | MEM002 xem của MEM006| **Không được phép** |
-| Thông tin phiếu đầy đủ?| Đang mượn | BR001 | Hiện ID, Sách, Ngày, "Đang mượn" |
-| | Đã trả | BR002 | Hiện "Đã trả" |
-| | Quá hạn | BR001 | Hiện "Quá hạn" |
-
-## Bước 2: Test Cases
-
-###  Tester 2 — REQ 01 và REQ 07 
-
-| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-| TC-01 | Kiểm tra đăng nhập thành công với tài khoản hợp lệ đã được đăng kí | 1. Người dùng chưa đăng nhập <br><br> 2. Tài khoản đã tồn tại và đã kích hoạt trên hệ thống | 1. Truy cập trang đăng nhập <br><br> 2. Nhập email hợp lệ <br><br> 3. Nhập mật khẩu đúng <br><br> 4. Ấn đăng nhập | 1. Điền email : librarian@library.com <br><br> 2. Nhập mật khẩu : admin123 | 1. Chuyển sang trang chủ thành công <br><br> 2. App bar hiển thị đúng tên người dùng và vai trò : Nguyễn Thủ Thư(Thủ thư) | REQ-01 | EP |
-| TC-02 | Kiểm tra báo lỗi khi để trống cả email và mật khẩu | Người dùng chưa đăng nhập | 1. Truy cập trang web phần đăng nhập tài khoản <br><br> 2. Không điền gì vào phần email và mật khẩu <br><br> 3. Ấn đăng nhập | Để trống cả phần email và cả mật khẩu | Hệ thống hiển thị thông báo lỗi : Vui lòng nhập email và mật khẩu | REQ-01 | Decision Table | 
-| TC-03 | Kiểm tra báo lỗi khi nhập đúng email nhưng để trống mật khẩu | Người dùng chưa đăng nhập | 1. Truy cập vào web chỗ đăng nhập tài khoản <br><br> 2. Nhập đúng email  <br><br> 3. Để trống mật khẩu <br><br> 4. Ấn đăng nhập | 1. Nhập email : librarian@library.com <br><br> 2. Mật khẩu : (để trống) <br><br> | Hệ thống ngăn chặn đăng nhập và hiển thị thông báo lỗi yêu cầu nhập mật khẩu (hoặc dùng chung thông báo bỏ trống). | REQ-01 | BVA |
-| TC-04 | Kiểm tra báo lỗi khi nhập đúng email nhưng sai mật khẩu | 1. Người dùng chưa đăng nhập <br><br> 2. Tài khoản đã tồn tại trên hệ thống | 1. Truy cập trang web phần đăng nhập <br><br> 2. Nhập email hợp lệ <br><br> 3. Điền sai mật khẩu <br><br> 4. Ấn đăng nhập | 1. Nhập email : librarian@library.com <br><br> 2. Nhập mật khẩu sai : hehe | Hệ thống hiển thị thông báo lỗi : Mật khẩu không đúng | REQ-01 | EP | 
-| TC-05 | Kiểm tra đăng nhập khi cố tình viết hoa chữ cái đầu tiên của email | 1. Người dùng chưa đăng nhập <br><br> 2. Hệ thống đã có tài khoản librarian@library.com | 1. Vào trang đăng nhập <br><br> 2. Nhập email viết hoa chữ cái đầu tiên <br><br> 3. Nhập mật khẩu đúng <br><br> 4. Ấn đăng nhập | 1. Nhập email : Librarian@library.com <br><br> 2. Nhập mật khẩu : admin123 | Hệ thống tự động chuyển đổi mail về chữ thường, đăng nhập thành công và chuyển hướng sang trang chủ | REQ-01 | EP |
-| TC-06 | Kiểm tra tính bảo mật của ô nhập mật khẩu | Người dùng đang ở trang đăng nhập | Nhập kí tự vào ô mật khẩu | Nhập mật khẩu : admin123 | Các ký tự nhập vào phải được ẩn đi dưới dạng dấu chấm (●●●●●) hoặc dấu sao (*****) | REQ-01 | Black-box Testing |
-| TC-07 | Kiểm tra báo lỗi khi email nhập sai định dạng cấu trúc | Người dùng chưa đăng nhập | 1. Truy cập trang đăng nhập <br><br> 2. Nhập email sai định dạng cấu trúc <br><br> 3. Nhập mật khẩu bất kì <br><br> 4. Ấn đăng nhập | 1. Nhập email : ngochanhiepdepzai <br><br> 2. Điền mật khẩu bất kì | Hệ thống báo lỗi định dạng email không hợp lệ và không gửi request lên server | REQ-01 | EP |
-| TC-08 | Kiểm tra thêm thành viên thành công với quyền Thủ thư | Đăng nhập tài khoản có quyền Thủ thư | 1. Điền đầy đủ thông tin hợp lệ <br><br> 2. Nhấn nút : Thêm thành viên | 1. Họ và tên : Ngô Chấn Hiệp <br><br> 2. email : ngohiep010605@gmail.com <br><br> 3. Số điện thoại : 0941898905 | Thành viên mới được tạo thành công và lưu vào hệ thống,hiển thị thông báo : Thêm thành viên thành công! Mã: MEMxxx | REQ-07 | EP |
-| TC-09 | Kiểm tra chặn quyền khi không phải Thủ thư | Đăng nhập tài khoản không có quyền Thủ thư ( ví dụ : Thành Viên ) | 1. Đăng nhập bằng tài khoản có vai trò không phải thủ thư <br><br> 2. Ấn đăng nhập | 1. email : dam.tran@email.com <br><br> 2. mật khẩu : password123 | 1. Chuyển sang trang nhập nhập <br><br> 2. Appbar hiển thị đầy đủ thông tin Trần Dựa Dẫm ( Thành Viên ) <br><br> 3. Không có nút thêm thành viên | REQ-07 | EP |
-| TC-10 | Kiểm tra để trống tất cả các dữ liệu bắt buộc | Đăng nhập tài khoản có quyền Thủ thư | 1. Để trống tất cả các thông tin Họ và tên, email, số điện thoại <br><br> 2. Ấn thêm thành viên | Để trống dữ liệu | Hệ thống ngăn chặn việc gửi dữ liệu và hiển thị lỗi nhắc nhở nhập các trường bắt buộc | REQ-7 | Decision Table |
-| TC-11 | Thêm thành viên với định dạng email không hợp lệ (Có @ nhưng thiếu dấu .) | Đăng nhập tài khoản có quyền Thủ thư | 1. Nhập thông tin với email thiếu dấu chấm ở phần domain <br><br> 2. Ấn thêm thành viên | 1. Họ và tên : ngo chán hiep <br><br> 2. email : ghiep342@gmail.com <br><br> 3. Số điện thoại : 0941898905 | Hệ thống báo lỗi email không hợp lệ, không cho phép đăng ký | REQ-07 | EP |
-| TC-12 | Thêm thành viên với định dạng email không hợp lệ (thiếu @ nhưng có dấu .) | Đăng nhập tài khoản có quyền Thủ thư | 1. Nhập thông tin với email có dấu chấm ở đầu hoặc cuối domain <br><br> 2. Ấn thêm thành viên | 1. Họ và tên : toi ten la tao <br><br> 2. email : ghiep242.com <br><br> 3. Số điện thoại : 0941898905 | Hệ thống báo lỗi email không hợp lệ, không cho phép đăng ký | REQ-07 | EP | 
-| TC-13 | Kiểm tra tạo thành viên với Email đã tồn tại | Đăng nhập tài khoản có quyền Thủ thư | 1. Đăng nhập tài khoản có quyền Thủ thư <br><br> 2. Dùng email đã có sẵn trên hệ thống (dam.tran@email.com) | 1. Họ và tên : Ngô Chấn Hiệp <br><br> 2. email : dam.tran@email.com <br><br> 3. Số điện thoại : 0941898905 | Hệ thống ngăn chặn và hiển thị thông báo lỗi trùng lặp (ví dụ: "Email này đã tồn tại") | REQ-07 | EP |
----
-
-###  Tester 3 — Phụ trách User Module & Xác thực
-
-| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-
+| Looked up by role? | Librarian | `librarian@library.com` | Allowed to view **all** receipts |
+| | Member | `ba.nguyen@email.com` | Only allowed to view receipts of MEM002 |
+| View others' receipts? | Intentional lookup | MEM002 views MEM006's| **Not allowed** |
+| Receipt details complete?| Borrowing | BR001 | Show ID, Book, Date, "Borrowed" |
+| | Returned | BR002 | Show "Returned" |
+| | Overdue | BR001 | Show "Overdue" |
 
 ---
 
-###  Tester 4 — Phụ trách Logic & Nghiệp vụ nâng cao
+## Step 2: Test Cases
 
-**Bảng Decision Table (REQ-05):**
-| Điều kiện / Hành động | Rule 1 | Rule 2 | Rule 3 | Rule 4 |
+### Tester 2 — REQ 01 and REQ 07 
+
+| TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
+|-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
+| TC-01 | Verify successful login with a valid registered account | 1. User is not logged in.<br><br>2. Account exists and is activated in the system. | 1. Access login page.<br><br>2. Enter valid email.<br><br>3. Enter correct password.<br><br>4. Click Login. | 1. Email: librarian@library.com<br><br>2. Password: admin123 | 1. Redirect to homepage successfully.<br><br>2. App bar correctly displays user name and role: Nguyễn Thủ Thư (Librarian). | REQ-01 | EP |
+| TC-02 | Verify error message when leaving both email and password blank | User is not logged in. | 1. Access login section of the website.<br><br>2. Leave both email and password blank.<br><br>3. Click Login. | Leave both fields blank. | System displays error message: "Please enter email and password". | REQ-01 | Decision Table | 
+| TC-03 | Verify error message when entering correct email but leaving password blank | User is not logged in. | 1. Access login section of the website.<br><br>2. Enter correct email.<br><br>3. Leave password blank.<br><br>4. Click Login. | 1. Email: librarian@library.com<br><br>2. Password: (blank) | System blocks login and displays error message requiring password (or shares the blank field notification). | REQ-01 | BVA |
+| TC-04 | Verify error message when entering correct email but incorrect password | 1. User is not logged in.<br><br>2. Account exists in the system. | 1. Access login section of the website.<br><br>2. Enter valid email.<br><br>3. Enter incorrect password.<br><br>4. Click Login. | 1. Email: librarian@library.com<br><br>2. Password: hehe | System displays error message: "Incorrect password". | REQ-01 | EP | 
+| TC-05 | Verify login behavior when intentionally capitalizing the first letter of the email | 1. User is not logged in.<br><br>2. Account librarian@library.com exists in the system. | 1. Go to login page.<br><br>2. Enter email with capitalized first letter.<br><br>3. Enter correct password.<br><br>4. Click Login. | 1. Email: Librarian@library.com<br><br>2. Password: admin123 | System automatically converts email to lowercase, logs in successfully, and redirects to homepage. | REQ-01 | EP |
+| TC-06 | Verify the security/masking of the password input field | User is on the login page. | Type characters into password field. | Password: admin123 | Entered characters must be masked as dots (●●●●●) or asterisks (*****). | REQ-01 | Black-box Testing |
+| TC-07 | Verify error message when email format is invalid | User is not logged in. | 1. Access login page.<br><br>2. Enter invalid format email.<br><br>3. Enter any password.<br><br>4. Click Login. | 1. Email: ngochanhiepdepzai<br><br>2. Password: any | System displays invalid email format error message and does not send request to server. | REQ-01 | EP |
+| TC-08 | Verify successful member addition with Librarian permission | Logged in with Librarian role. | 1. Fill in all valid information.<br><br>2. Click button: Add Member. | 1. Full Name: Ngô Chấn Hiệp<br><br>2. Email: ngohiep010605@gmail.com<br><br>3. Phone: 0941898905 | New member is created successfully and saved in the system, displaying: "Member added successfully! ID: MEMxxx". | REQ-07 | EP |
+| TC-09 | Verify permission block when role is not Librarian | Logged in with a non-Librarian account (e.g., Member). | 1. Log in with non-librarian role account.<br><br>2. Observe interface. | 1. Email: dam.tran@email.com<br><br>2. Password: password123 | 1. Redirect to login/home page.<br><br>2. Appbar shows full information: Trần Dựa Dẫm (Member).<br><br>3. "Add Member" button is not visible. | REQ-07 | EP |
+| TC-10 | Verify behavior when leaving all mandatory fields blank | Logged in with Librarian role. | 1. Leave Full Name, Email, and Phone fields blank.<br><br>2. Click Add Member. | All fields blank. | System prevents data submission and displays error prompts for mandatory fields. | REQ-07 | Decision Table |
+| TC-11 | Add member with invalid email format (Has @ but missing dot .) | Logged in with Librarian role. | 1. Fill in info with email missing a dot in the domain section.<br><br>2. Click Add Member. | 1. Full Name: ngo chan hiep<br><br>2. Email: ghiep342@gmailcom<br><br>3. Phone: 0941898905 | System displays invalid email error message, registration denied. | REQ-07 | EP |
+| TC-12 | Add member with invalid email format (Missing @ but has dot .) | Logged in with Librarian role. | 1. Fill in info with email missing @ symbol but having domain dot.<br><br>2. Click Add Member. | 1. Full Name: toi ten la tao<br><br>2. Email: ghiep242.com<br><br>3. Phone: 0941898905 | System displays invalid email error message, registration denied. | REQ-07 | EP | 
+| TC-13 | Verify behavior when creating a member with an already existing email | Logged in with Librarian role. | 1. Log in as Librarian.<br><br>2. Use an email already existing on the system (dam.tran@email.com). | 1. Full Name: Ngô Chấn Hiệp<br><br>2. Email: dam.tran@email.com<br><br>3. Phone: 0941898905 | System blocks and displays duplication error message (e.g., "This email already exists"). | REQ-07 | EP |
+
+---
+
+### Tester 3 — In charge of User Module & Authentication
+
+| TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
+|-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
+
+---
+
+### Tester 4 — In charge of Logic & Advanced Business Rules
+
+**Decision Table (REQ-05):**
+| Condition / Action | Rule 1 | Rule 2 | Rule 3 | Rule 4 |
 |-----------------------|--------|--------|--------|--------|
-| **Tài khoản hoạt động?** | Có | Có | Không | Không |
-| **Sách có sẵn?** | Có | Không | Có | Không |
-| **Cho phép mượn?** | **YES** | **NO** | **NO** | **NO** |
+| **Account Active?** | Yes | Yes | No | No |
+| **Book Available?** | Yes | No | Yes | No |
+| **Allow Borrowing?** | **YES** | **NO** | **NO** | **NO** |
 
-| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-
----
-
-### Tester 5 - QA Analyst & Báo cáo tổng hợp
-
-| Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
+| TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
+|-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
 
 ---
 
-## Tổng hợp
+### Tester 5 - QA Analyst & Summary Report
 
-| Nhóm chức năng | Số TC | REQ phủ | Kỹ thuật áp dụng |
-|----------------|-------|---------|----------------------|
-| Người 2 | 6 | REQ-03, REQ-04 | BVA |
-| Người 3 | 6 | REQ-01, REQ-07 | EP |
-| Người 4 | 6 | REQ-02, REQ-05 | Decision Table |
-| Người 5 | 6 | REQ-06, REQ-08 | N/A |
-| **Tổng** | **24** | **Bao phủ toàn bộ** | |# Test Cases — Bảng trường hợp kiểm thử
+| TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
+|-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
 
+---
 
+## Summary
+
+| Functional Group | No. of TCs | Covered REQ | Applied Technique |
+|------------------|------------|-------------|-------------------|
+| Tester 2 | 6 | REQ-03, REQ-04 | BVA |
+| Tester 3 | 6 | REQ-01, REQ-07 | EP |
+| Tester 4 | 6 | REQ-02, REQ-05 | Decision Table |
+| Tester 5 | 6 | REQ-06, REQ-08 | N/A |
+| **Total** | **24** | **Full Coverage** | |
 
 
 

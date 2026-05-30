@@ -1,244 +1,227 @@
-# Bug Reports — Báo cáo lỗi
+# Bug Reports
 
-> **Hướng dẫn**: Tạo 1 mục bug cho mỗi TC có kết quả **Fail**.
-> Xem [examples/sample-bug-report.md](../examples/sample-bug-report.md) để hiểu cách viết bug report tốt.
-> Mỗi bug cần: tiêu đề mô tả hành vi lỗi, bước tái hiện, expected vs actual, severity + giải thích.
+> **Instructions**: Create 1 bug item for each TC with a **Fail** result.
+> See [examples/sample-bug-report.md](../examples/sample-bug-report.md) to understand how to write a good bug report.
+> Each bug needs: descriptive title of the bug behavior, reproduction steps, expected vs actual, severity + explanation.
 
-| Thông tin | |
+| Information | |
 |---|---|
-| **Nhóm** | Nhóm 10 |
-| **Ngày báo cáo** |  |
+| **Team** | Team 10 |
+| **Report Date** | 30/05/2026 |
 
 ---
 
 ## BUG-01
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-01 |
-| **TC liên quan** | TC-05 |
-| **REQ liên quan** | REQ-01 |
-| **Mức độ** | High |
-| **Người phát hiện** | Ngô Chấn Hiệp - 23BA14102 |
-| **Ngày phát hiện** | 27/05/2026 |
-| **Trạng thái** | Open |
+| **Bug ID** | BUG-01 |
+| **Related TC** | TC-05 |
+| **Related REQ** | REQ-01 |
+| **Severity** | High |
+| **Reporter** | Ngô Chấn Hiệp - 23BA14102 |
+| **Date Discovered** | 27/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-Chức năng đăng nhập phân biệt chữ hoa,thường đối với email dẫn đến thông báo sai : Không tìm thấy thành viên
+**Title:**
+Login function is case-sensitive for email, leading to incorrect error message: "Member not found"
 
-**Môi trường:**
-- Trình duyệt: Chrome 
-- Hệ điều hành: Window 11
-- Ngôn ngữ giao diện: Tiếng Việt
+**Environment:**
+- Browser: Chrome 
+- OS: Windows 11
+- Interface Language: Vietnamese
 
-**Điều kiện tiên quyết:**
-Trang đăng nhập đã mở, hệ thống đã có sẵn tài khoản thành viên hợp lệ với email viết thường ( ví dụ: librarian@library.com )
+**Prerequisites:**
+Login page is open, system has an existing valid member account with a lowercase email (e.g., librarian@library.com)
 
-**Bước tái hiện:**
-1. Truy cập vào trang đăng nhập của web
-2. Tại ô email, nhập email hợp lệ nhưng viết hoa chữ cái đầu tiên ( ví dụ : librarian@library.com )
-3. Tại ô mật khẩu , nhập mật khẩu chính xác của email đó
-4. Ấn đăng nhập
+**Reproduction Steps:**
+1. Access the system login page.
+2. In the email field, enter the valid email but capitalize the first letter (e.g., Librarian@library.com).
+3. In the password field, enter the correct password for that email.
+4. Click Login.
 
-**Kết quả mong đợi:**
-Hệ thống không phân biệt chữ hoa hay chữ thường đối với email , hệ thống tự động đổi chuỗi email về chữ thường và đăng nhập thành công rồi chuyển sang trang chủ 
+**Expected Result:**
+The system should not be case-sensitive for email fields; it should automatically convert the email string to lowercase, successfully log in, and redirect to the homepage.
 
-**Kết quả thực tế:**
-Hệ thống phân biệt chữ hoa,thường và không nhận diện được tài khoản rồi hiển thị thông báo lỗi sai thực tế : Không tìm thấy thành viên
+**Actual Result:**
+The system enforces case-sensitivity, fails to recognize the account, and displays an inaccurate error message: "Member not found".
 
-**Tác động:**
-Vi phạm quy tắc trải nghiệm người dùng cốt lõi. Người dùng trên thiết bị di động (thường tự động viết hoa chữ cái đầu do bàn phím) hoặc người dùng vô tình bật CapsLock sẽ không thể đăng nhập được dù tài khoản đã đăng kí thành công , gây khó chịu và nghĩ hệ thống bị lỗi dữ liệu
+**Impact:**
+Violates core user experience (UX) guidelines. Mobile users (whose keyboards often auto-capitalize the first letter) or users who accidentally turn on CapsLock will fail to log in despite having a registered account, causing frustration and giving the impression that the system has data errors.
 
-**Minh chứng:**
+**Evidence:**
 ![BUG-01](images/Bug-01.png)
 
-
-
-**Đề xuất xử lý:**
+**Proposed Fix:**
 
 ---
 
 ## BUG-02
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-02 |
-| **TC liên quan** | TC-07 |
-| **REQ liên quan** | REQ-01 |
-| **Mức độ** | Medium |
-| **Người phát hiện** | Ngô Chấn Hiệp |
-| **Ngày phát hiện** | 28/05/2026 |
-| **Trạng thái** | Open |
+| **Bug ID** | BUG-02 |
+| **Related TC** | TC-07 |
+| **Related REQ** | REQ-01 |
+| **Severity** | Medium |
+| **Reporter** | Ngô Chấn Hiệp |
+| **Date Discovered** | 28/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-Hệ thống thông báo lỗi không chính xác và sai logic xác thực khi người dùng nhập sai định dạng email tại màn hình đăng nhập
+**Title:**
+System displays incorrect error message and flawed validation logic when entering an invalid email format on the login screen
 
-**Bước tái hiện:**
-1. Truy cập vào màn hình đăng nhập của hệ thống
-2. Nhập email sai định dạng (vdu: ngochanhiepdepzai), nhập mật khẩu hợp lệ bất kỳ và nhấn nút đăng nhập
+**Reproduction Steps:**
+1. Access the system login screen.
+2. Enter an invalid email format (e.g., ngochanhiepdepzai), enter any valid password format, and click the login button.
 
-**Kết quả mong đợi:**
-- Hệ thống cần thực hiện kiểm tra định dạng email trước khi kiểm tra trong dâtbase
-- Hiển thị thông báo: Email không đúng định dạng
+**Expected Result:**
+- The system should perform email format validation before querying the database.
+- Display error message: "Invalid email format".
 
-**Kết quả thực tế:**
-Hệ thống hiển thị thông báo: Không tìm thấy thành viên 
+**Actual Result:**
+The system displays the error message: "Member not found".
 
-**Tác động:**
-Gây bối rối và hiểu lầm cho người dùng. Người dùng sẽ tưởng email chưa được đăng ký hệ thống hoặc tưởng mình chưa nhập email mặc dù họ đã nhập nhưng chỉ bị sai định dạng
+**Impact:**
+Causes confusion and misunderstanding for the user. Users will think their email has not been registered yet or think they missed entering the email, even though they did enter it but with an invalid format.
 
-**Minh chứng:**
-![BUG-02](images/Bug-02.png)
+**Evidence:**
+![BUG-02](images/BUG-02.png)
 
-**Đề xuất xử lý:**
+**Proposed Fix:**
 
 ---
 
 ## BUG-03
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-03 |
-| **TC liên quan** | TC-08 , TC-11 |
-| **REQ liên quan** | REQ-07 |
-| **Mức độ** | High |
-| **Người phát hiện** | Ngô Chấn Hiệp - 23BA14102 |
-| **Ngày phát hiện** | 29/05/2026 |
-| **Trạng thái** | Open |
+| **Bug ID** | BUG-03 |
+| **Related TC** | TC-08, TC-11 |
+| **Related REQ** | REQ-07 |
+| **Severity** | High |
+| **Reporter** | Ngô Chấn Hiệp - 23BA14102 |
+| **Date Discovered** | 29/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-Lỗi logic xác thực định dạng Email: Email hợp lệ bị chặn báo lỗi, email không hợp lệ (thiếu dấu .) lại được chấp nhận
+**Title:**
+Email validation logic error: Valid email is blocked with an error, while invalid email (missing dot .) is accepted
 
-**Môi trường:**
-- Trình duyệt: Chrome 
-- Hệ điều hành: Window 11
-- Ngôn ngữ giao diện: Tiếng Việt
+**Environment:**
+- Browser: Chrome 
+- OS: Windows 11
+- Interface Language: Vietnamese
 
-**Điều kiện tiên quyết:**
-Tài khoản đăng nhập đang có quyền Thủ thư. Trang Thêm thành viên mới đã được mở
+**Prerequisites:**
+Logged-in account has Librarian permissions. The "Add New Member" page is open.
 
+**Reproduction Steps:**
+1. Navigate to the "Add New Member" interface.
+2. Case 1 (Replicating TC-08): Fill in all valid details with a properly formatted email `ngohiep010605@gmail.com`, then click the "Add Member" button.
+3. Case 2 (Replicating TC-11): Fill in all details with an invalid email format (has @ but missing dot . in domain) `ghiep342@gmailcom`, then click the "Add Member" button.
 
-**Bước tái hiện:**
-1. Truy cập vào giao diện Thêm thành viên mới
-2. Trường hợp 1 (Tái hiện TC-08): Nhập đầy đủ thông tin hợp lệ với Email chuẩn định dạng là ngohiep010605@gmail.com , nhấn nút Thêm thành viên
-3. Trường hợp 2 (Tái hiện TC-05): Nhập đầy đủ thông tin với Email sai định dạng (có @ nhưng thiếu dấu . ở domain) là ghiep342@gmailcom , nhấn nút Thêm thành viên
+**Expected Result:**
+1. Case 1: Member is successfully created, data is saved, and a success message is displayed.
+2. Case 2: System blocks the creation, prevents data submission, and displays an error message: "Invalid email".
 
+**Actual Result:**
+1. Case 1: System blocks the action, refuses to create the member, and throws an error: "Invalid email".
+2. Case 2: System successfully creates the new member with the malformed email `ghiep342@gmailcom`.
 
-**Kết quả mong đợi:**
-1. Trường hợp 1: Thành viên được tạo thành công, hệ thống lưu dữ liệu và báo thành công
-2. Trường hợp 2: Hệ thống phải chặn lại, không cho tạo và hiển thị thông báo lỗi "Email không hợp lệ"
+**Impact:**
+Violates core business rules on email validation. Prevents valid users from signing up while allowing invalid/junk data to populate the database.
 
-
-**Kết quả thực tế:**
-1. Trường hợp 1: Hệ thống chặn lại không cho tạo và hiển thị thông báo lỗi "Email không hợp lệ".
-2. Trường hợp 2: Hệ thống tạo thành viên mới thành công với email sai định dạng ghiep342@gmailcom
-
-**Tác động:**
-Vi phạm quy tắc nghiệp vụ cốt lõi về kiểm tra định dạng dữ liệu (Email validation). Khiến người dùng nhập đúng không thể đăng ký, còn người dùng nhập sai lại tạo được tài khoản rác vào database.
-
-**Minh chứng:**
+**Evidence:**
 ![BUG-03](images/tc-08.png)
 ![BUG-03](images/tc-11.png)
 
-**Đề xuất xử lý:**
+**Proposed Fix:**
 
 ---
 
-
-
 ## BUG-04
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-04 |
-| **TC liên quan** | TC-13(ảnh hưởng bởi TC-08) |
-| **REQ liên quan** | REQ-07 |
-| **Mức độ** | High |
-| **Người phát hiện** | `Ngô Chấn Hiệp |
-| **Ngày phát hiện** | 29/05/2026 |
-| **Trạng thái** | Open |
+| **Bug ID** | BUG-04 |
+| **Related TC** | TC-13 (affected by TC-08) |
+| **Related REQ** | REQ-07 |
+| **Severity** | High |
+| **Reporter** | Ngô Chấn Hiệp |
+| **Date Discovered** | 29/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-Thêm thành viên bằng email đã tồn tại hiển thị sai thông báo lỗi (Hiển thị "Email không hợp lệ" thay vì "Email đã tồn tại")
+**Title:**
+Adding a member with an existing email triggers the wrong error message (Displays "Invalid email" instead of "Email already exists")
 
-**Môi trường:**
-- Trình duyệt: Chrome 
-- Hệ điều hành: Window 11 
-- Ngôn ngữ giao diện: Tiếng Việt
+**Environment:**
+- Browser: Chrome 
+- OS: Windows 11 
+- Interface Language: Vietnamese
 
-**Điều kiện tiên quyết:**
-1. Tài khoản đăng nhập đang có quyền Thủ thư
-2. Trên hệ thống đã tồn tại sẵn một tài khoản có email là dam.tran@email.com (đây là email đúng định dạng)
+**Prerequisites:**
+1. Logged-in account has Librarian permissions.
+2. An account with the email `dam.tran@email.com` (properly formatted) already exists in the system.
 
-**Bước tái hiện:**
-1. Truy cập vào giao diện Thêm thành viên mới
+**Reproduction Steps:**
+1. Navigate to the "Add New Member" interface.
+2. Enter a valid Full Name and Phone Number.
+3. In the email field, enter the pre-existing email: `dam.tran@email.com`.
+4. Click the "Add Member" button.
 
-2. Nhập các thông tin Họ và tên, Số điện thoại hợp lệ
+**Expected Result:**
+The system checks for duplication, blocks duplicate creation, and displays a clear error message: "Email already exists in the system".
 
-3. Tại phần email, nhập email đã tồn tại trên hệ thống : dam.tran@email.com
+**Actual Result:**
+The system blocks the account creation but displays the wrong error message: "Invalid email".
 
-4. Nhấn nút Thêm thành viên
+**Impact:**
+Violates the SRS business rule error message standard. Misleading notification makes the user/librarian think their email format is wrong, rather than knowing that this email has already been registered.
 
-**Kết quả mong đợi:**
-Hệ thống kiểm tra trùng lặp, ngăn chặn việc tạo tài khoản trùng và hiển thị thông báo lỗi rõ ràng: Email đã tồn tại trên hệ thống
-
-**Kết quả thực tế:**
-Hệ thống ngăn chặn không cho tạo tài khoản, nhưng hiển thị thông báo lỗi: Email không hợp lệ
-
-**Tác động:**
-Vi phạm quy tắc thông báo lỗi nghiệp vụ SRS. Thông báo sai lệch làm người dùng/thủ thư hiểu lầm rằng định dạng email của họ bị sai, thay vì biết rằng email này đã được đăng ký trước đó
-
-**Minh chứng:**
+**Evidence:**
 ![BUG-04](images/tc-13.png)
 
-**Đề xuất xử lý:**
+**Proposed Fix:**
 
 ---
 
 ## BUG-05
 
-| Thuộc tính | Chi tiết |
+| Attribute | Details |
 |-----------|---------|
-| **Mã lỗi** | BUG-05 |
-| **TC liên quan** | TC-10 |
-| **REQ liên quan** | REQ-07 |
-| **Mức độ** | Low |
-| **Người phát hiện** | Ngô Chấn Hiệp |
-| **Ngày phát hiện** | 29/05/2026 |
-| **Trạng thái** | Open |
+| **Bug ID** | BUG-05 |
+| **Related TC** | TC-10 |
+| **Related REQ** | REQ-07 |
+| **Severity** | Low |
+| **Reporter** | Ngô Chấn Hiệp |
+| **Date Discovered** | 29/05/2026 |
+| **Status** | Open |
 
-**Tiêu đề:**
-Chức năng Thêm thành viên chỉ hiển thị thông báo lỗi của phần "Họ và tên" khi để trống toàn bộ form dữ liệu.
+**Title:**
+"Add Member" function only displays the error message for "Full Name" when the entire form data is left blank.
 
-**Môi trường:**
-- Trình duyệt: Chrome 
-- Hệ điều hành: Window 11
-- Ngôn ngữ giao diện: Tiếng Việt
+**Environment:**
+- Browser: Chrome 
+- OS: Windows 11
+- Interface Language: Vietnamese
 
-**Điều kiện tiên quyết:**
-Tài khoản đăng nhập đang có quyền Thủ thư. Trang Thêm thành viên mới đã được mở và các ô nhập liệu đang trống.
+**Prerequisites:**
+Logged-in account has Librarian permissions. The "Add New Member" page is open and all input fields are empty.
 
-**Bước tái hiện:**
-1. Để trống toàn bộ các thông tin: Họ và tên, Email, Số điện thoại
+**Reproduction Steps:**
+1. Leave all fields (Full Name, Email, Phone Number) blank.
+2. Click "Add Member".
 
-2. Nhấn Thêm thành viên
+**Expected Result:**
+The system blocks the submission and displays error messages/red validation alerts for all mandatory fields left empty (Full Name, Email, Phone Number) simultaneously, allowing the user to fill them out at once.
 
-**Kết quả mong đợi:**
-Hệ thống chặn lại và hiển thị thông báo lỗi/cảnh báo đỏ cho tất cả các trường bắt buộc đang bị bỏ trống (Họ và tên, Email, Số điện thoại) để người dùng biết và điền một lần
+**Actual Result:**
+The system only displays a single error message: "Full Name cannot be left blank". The Email and Phone Number fields show no validation warnings despite being blank.
 
-**Kết quả thực tế:**
-Hệ thống chỉ hiển thị duy nhất một dòng thông báo lỗi: "Họ và tên không được để trống". Các trường Email và Số điện thoại không hề hiển thị cảnh báo lỗi dù cũng đang bị bỏ trống
+**Impact:**
+Degrades user experience (UX). Users are forced to click the "Add Member" button multiple times (fixing one field error only to trigger the next sequential error), causing unnecessary delay and irritation.
 
-**Tác động:**
-Làm giảm trải nghiệm người dùng (UX). Người dùng sẽ phải bấm nút "Thêm thành viên" nhiều lần (sửa xong lỗi này mới nhìn thấy lỗi tiếp theo) gây mất thời gian và khó chịu.
-
-**Minh chứng:**
+**Evidence:**
 ![BUG-05](images/tc-10.png)
 
-**Đề xuất xử lý:**
-
-
----
-
-
-
+**Proposed Fix:**
