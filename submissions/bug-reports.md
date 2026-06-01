@@ -53,7 +53,13 @@ Violates core user experience (UX) guidelines. Mobile users (whose keyboards oft
 ![BUG-01](images/Bug-01.png)
 
 **Proposed Fix:**
+- Normalize the email input by converting it to lowercase (toLowerCase()) before performing database lookup.
 
+- Store and compare email values in a case-insensitive manner.
+
+- Update authentication logic to treat Librarian@library.com and librarian@library.com as the same account.
+
+- Add unit tests and validation tests for different email capitalization scenarios.
 ---
 
 ## BUG-02
@@ -89,6 +95,13 @@ Causes confusion and misunderstanding for the user. Users will think their email
 ![BUG-02](images/BUG-02.png)
 
 **Proposed Fix:**
+- Implement client-side and server-side email format validation before querying the database.
+
+- Use a standard email validation pattern (e.g., RFC-compliant regex).
+
+- If the email format is invalid, immediately stop the login process and display the message: "Invalid email format".
+
+- Only perform account lookup after the email format passes validation.
 
 ---
 
@@ -136,6 +149,15 @@ Violates core business rules on email validation. Prevents valid users from sign
 ![BUG-03](images/tc-11.png)
 
 **Proposed Fix:**
+- Review and correct the email validation regex/validation function.
+
+- Ensure properly formatted emails (e.g., user@gmail.com) are accepted.
+
+- Reject malformed emails that do not contain a valid domain structure (e.g., missing "." after the domain name).
+
+- Add automated test cases covering both valid and invalid email formats.
+
+- Perform validation before saving member information to the database.
 
 ---
 
@@ -182,7 +204,15 @@ Violates the SRS business rule error message standard. Misleading notification m
 ![BUG-04](images/tc-13.png)
 
 **Proposed Fix:**
+- Separate email format validation and email uniqueness validation into two independent checks.
 
+- First validate the email format.
+
+- If the format is valid, check whether the email already exists in the database.
+
+- When duplication is detected, display the message: "Email already exists in the system" instead of "Invalid email".
+
+- Add test cases for duplicate-email scenarios to ensure accurate error reporting.
 ---
 
 ## BUG-05
@@ -225,3 +255,12 @@ Degrades user experience (UX). Users are forced to click the "Add Member" button
 ![BUG-05](images/tc-10.png)
 
 **Proposed Fix:**
+- Implement comprehensive form validation that checks all required fields simultaneously.
+
+- Display validation messages for every missing required field (Full Name, Email, Phone Number) in a single submission attempt.
+
+- Highlight all invalid fields at once to reduce repeated user actions.
+
+- Prevent form submission until all validation errors are resolved.
+
+- Add UI validation tests to verify that multiple errors can be displayed concurrently.
