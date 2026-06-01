@@ -16,7 +16,7 @@
 
 | Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
 |-------|---------------|---------------------------|-----------------|---------|-----------|----| 
-| | | | | | | |
+| TC-18 | Xử lý sách quá hạn | 1.Thông báo 'đã cập nhật: 2' sách quá hạn <br><br>2.Trạng thái sách chuyển từ 'đang mượn' thành 'quá hạn' | Kiểm tra lần 1: | | | |
 
 ---
 
