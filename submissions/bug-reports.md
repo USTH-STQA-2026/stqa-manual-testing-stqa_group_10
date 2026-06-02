@@ -45,17 +45,6 @@ This reduces search usability for Vietnamese users. Many users may type Vietname
 **Evidence:**
 ![BUG-01](images/BUG-01.png)
 
-**How to take evidence:**
-
-1. Open the `Books` tab.
-2. Take a screenshot showing that a book with Vietnamese accented title exists, for example `Lập trình Flutter cơ bản`.
-3. Enter `lap trinh` in the search box.
-4. Take another screenshot showing that no matching book is displayed.
-5. Save the screenshots as:
-
-   * `images/BUG-01-1.png`
-   * `images/BUG-01-2.png`
-
 **Proposed Fix:**
 
 * Normalize Vietnamese text before searching.
@@ -112,20 +101,6 @@ Users cannot filter books by category even though valid categories are available
 
 **Evidence:**
 ![BUG-02](images/BUG-02.png)
-
-**How to take evidence:**
-
-1. Open the `Books` tab.
-2. Take a screenshot showing the category filter field and the available category suggestion text, for example: `Công nghệ, Giáo dục, Kinh tế, Kỹ năng mềm, Quản trị, Văn học`.
-3. Enter `Công` in the category filter field.
-4. Take a screenshot showing that no books are displayed.
-5. Clear the field and enter `Kinh`.
-6. Take another screenshot showing that no books are displayed.
-7. Save the screenshots as:
-
-   * `images/BUG-02-1.png`
-   * `images/BUG-02-2.png`
-   * `images/BUG-02-3.png`
 
 **Proposed Fix:**
 
