@@ -172,13 +172,13 @@
 
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
-|TC-23|Verify successful book borrowing under limit (< 3)|Logged in as `biet.hoang@email.com` (currently has 1 active borrow)| 1. Go to "Books" tab.<br>2. Click the "+" button for an "Available" book (`"BOOK001"`) then "Borrow".<br>3. Navigate to the "Borrow / Return" tab.<br>4. Observe the newly created borrow record |`"BOOK001"`|Displays a success message. A borrow record is created with a due date set to exactly +14 days from today|REQ-04|EP(IDM: Available, Active, < 3)|
-|TC-24|Verify borrow rejection at the boundary limit (= 3)|Logged in as `ba.nguyen@email.com` (currently has 1 active borrow)| 1. Borrow `"BOOK001"` (Total = 2).<br>2. Borrow `"BOOK002"` (Total = 3).<br>3. Attempt to borrow `"BOOK005"`|`"BOOK001"`, `"BOOK002"`, `"BOOK005"`|System allows the first 2 borrows. Rejects the 3rd attempt (`"BOOK005"`) with an error message stating the limit of 3 books is reached|REQ-04|BVA(IDM: = 3)|
-|TC-25|Verify borrow rejection for "Suspended" member|Logged in as `cu.le@email.com` (Member status: Suspended)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Suspended" account status|REQ-04|DT/EP(IDM: Suspended)|
-|TC-26|Verify borrow rejection for an already "Borrowed" book|Logged in as `dam.tran@email.com`|1. Go to "Books" tab.<br>2. Search or locate `"BOOK003"` (Status: Borrowed).<br>3. Observe the book card|`"BOOK003"`|The "+" borrow button is completely hidden/disabled for this book and status is "Borrowed"|REQ-04|EP(IDM: Borrowed)|
-|TC-27|Verify borrow rejection for "Expired" member|Logged in as `binh.pham@email.com` (Member status: Expired)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Expired" account status|REQ-04|EP(IDM: Expired)|
-|TC-28|Verify borrow rejection for "Lost" book|Member `"ba.nguyen@email.com"` is logged in|1. Locate `"BOOK007"` (Status: Lost).<br>2. Observe the book card|Book: `"BOOK007"`|The "+" borrow button is completely hidden/disabled and status is "Lost"|REQ-04|EP (IDM: Lost)|
-|TC-29|Verify successful borrow at boundary limit (= 2)|Member `"ba.nguyen@email.com"` is logged in(has 1 active borrow)|1. Borrow BOOK002.<br>2. Observe system response|Book: `"BOOK002"`|System allows borrowing successfully (Total active borrows becomes exactly 2)|REQ-04|BVA (IDM: = 2)|
+|TC-23|Verify successful book borrowing under limit (< 3)|Logged in as `biet.hoang@email.com` (currently has 1 active borrow)| 1. Go to "Books" tab.<br>2. Click the "+" button for an "Available" book (`"BOOK001"`) then "Borrow".<br>3. Navigate to the "Borrow / Return" tab.<br>4. Observe the newly created borrow record |`"BOOK001"`|Displays a success message. A borrow record is created with a due date set to exactly +14 days from today|REQ-04|EP|
+|TC-24|Verify borrow rejection at the boundary limit (= 3)|Logged in as `ba.nguyen@email.com` (currently has 1 active borrow)| 1. Borrow `"BOOK001"` (Total = 2).<br>2. Borrow `"BOOK002"` (Total = 3).<br>3. Attempt to borrow `"BOOK005"`|`"BOOK001"`, `"BOOK002"`, `"BOOK005"`|System allows the first 2 borrows. Rejects the 3rd attempt (`"BOOK005"`) with an error message stating the limit of 3 books is reached|REQ-04|BVA|
+|TC-25|Verify borrow rejection for "Suspended" member|Logged in as `cu.le@email.com` (Member status: Suspended)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Suspended" account status|REQ-04|Decision Table|
+|TC-26|Verify borrow rejection for an already "Borrowed" book|Logged in as `dam.tran@email.com`|1. Go to "Books" tab.<br>2. Search or locate `"BOOK003"` (Status: Borrowed).<br>3. Observe the book card|`"BOOK003"`|The "+" borrow button is completely hidden/disabled for this book and status is "Borrowed"|REQ-04|EP|
+|TC-27|Verify borrow rejection for "Expired" member|Logged in as `binh.pham@email.com` (Member status: Expired)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Expired" account status|REQ-04|EP|
+|TC-28|Verify borrow rejection for "Lost" book|Member `"ba.nguyen@email.com"` is logged in|1. Locate `"BOOK007"` (Status: Lost).<br>2. Observe the book card|Book: `"BOOK007"`|The "+" borrow button is completely hidden/disabled and status is "Lost"|REQ-04|EP|
+|TC-29|Verify successful borrow at boundary limit (= 2)|Member `"ba.nguyen@email.com"` is logged in(has 1 active borrow)|1. Borrow BOOK002.<br>2. Observe system response|Book: `"BOOK002"`|System allows borrowing successfully (Total active borrows becomes exactly 2)|REQ-04|BVA|
 
 
 ---
@@ -188,7 +188,7 @@
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
 |TC-30|Return a borrowed book on time, no overdue warning| Logged in ba.nguyen@email.com. Just borrowed BOOK001.|1.Go to tab "Borrow/Return". 2.Find BOOK001 in "My borrow records". 3. Click "Return book". Confirm if prompted |BOOK001, borrow date = today, due date = today + 14 days|1.Success message shown. 2.Record status "Returned". 3.BOOK001 status -> "Available". 4.No overdue warning|REQ-05|EP|
-|TC-31|Return an overdue book - allowed but shows overdue warning | Logged in ba.nguyen@email.com. Record BR001 exists: MEM002 borrowed BOOK003, due 15/09/2024|1.Go to "Borrow/Return" tab. 2. Find "BOOK003" in "My Borrow records". 3. Click "Return book" |Record: BR001, BOOK003, due date: 15/09/2024, return date: today  |1. Return is accepted. 2. Overdue warning is displayed. 3. BR001 status -> "Returned". 4. BOOK003 status -> "Available" |REQ-05|EP, BVA |
+|TC-31|Return an overdue book - allowed but shows overdue warning | Logged in ba.nguyen@email.com. Record BR001 exists: MEM002 borrowed BOOK003, due 15/09/2024|1.Go to "Borrow/Return" tab. 2. Find "BOOK003" in "My Borrow records". 3. Click "Return book" |Record: BR001, BOOK003, due date: 15/09/2024, return date: today  |1. Return is accepted. 2. Overdue warning is displayed. 3. BR001 status -> "Returned". 4. BOOK003 status -> "Available" |REQ-05|EP |
 |TC-32| Cannot return a book borrowed by another member |Logged in ba.nguyen@email.com. BOOK013 is borrowed by another member, not MEM002 |1. Go to "Borrow/Return" tab. 2. Find BOOK013 in "My borrow records" |Account of MEM002 but BOOK013 is borrowed by MEM006 |1. Cannot find BOOK013 in MEM002's list. 2. No "Return" button available for BOOK013. 3. System does not allow returning another member's book |REQ-05 |EP |
 |TC-33| Book status updates immediately after return| Logged in as ba.nguyen@email.com.  BOOK003 currently shows "Borrowed" in Books tab|1.Go to "Borrow/Return". 2. Find BR001 in "My borrow records". 3. Click "Return book". 4. Immediately go back to "Books" tab. 5. Find BOOK003 |Record:BR001, BOOK003 |1. Before return: BOOK003 = "Borrowed". 2. After return: BOOK003 = "Available" — updates immediately |REQ-05 |EP |
 
@@ -197,8 +197,8 @@
 ### REQ-06
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-| TC-34 | Check overdue books | A borrow record has `dueDate` ≤ current date | 1. Log in with Librarian account.<br><br>2. Select 'Borrow/Return' tab.<br><br>3. Click 'Check overdue books' button. | Librarian account | 1. Notification 'updated: XX' overdue books.<br><br>2. Book statuses change from 'Borrowed' to 'Overdue'. | REQ-06 | BVA, STT |
-| TC-35 | Member sees their overdue receipts | A borrow record has `dueDate` ≤ current date | 1. Log in with Member account.<br><br>2. Select 'Borrow/Return' tab. | Member account | Book status for borrowed items changes from 'Borrowed' to 'Overdue' | REQ-06 | BVA, STT |
+| TC-34 | Check overdue books | A borrow record has `dueDate` ≤ current date | 1. Log in with Librarian account.<br><br>2. Select 'Borrow/Return' tab.<br><br>3. Click 'Check overdue books' button. | Librarian account | 1. Notification 'updated: XX' overdue books.<br><br>2. Book statuses change from 'Borrowed' to 'Overdue'. | REQ-06 | STT |
+| TC-35 | Member sees their overdue receipts | A borrow record has `dueDate` ≤ current date | 1. Log in with Member account.<br><br>2. Select 'Borrow/Return' tab. | Member account | Book status for borrowed items changes from 'Borrowed' to 'Overdue' | REQ-06 | STT |
 
 ### REQ-07
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
@@ -221,6 +221,13 @@
 ## Summary
 
 | Functional area | # of TCs | REQs covered | IDM techniques applied |
-|----------------|-------|---------|----------------------|
-| | | | |
-| **Total** | **<!-- ≥ 20 -->** | | |
+|----------------|------:|-------------|----------------------|
+| Login | 7 | REQ-01 | EP, BVA, Decision Table, Black-box Testing |
+| View Book List | 7 | REQ-02 | EP, Decision Table, BVA |
+| Search & Filter | 8 | REQ-03 | EP, Decision Table, BVA |
+| Borrow Book | 7 | REQ-04 | EP, BVA, Decision Table |
+| Return Book | 4 | REQ-05 | EP |
+| Overdue Handling | 2 | REQ-06 | State Transition Testing (STT) |
+| Manage Members | 6 | REQ-07 | EP, Decision Table |
+| Borrow Receipt Lookup | 2 | REQ-08 | EP |
+| **Total** | **43** | REQ-01..REQ-08 | EP, BVA, Decision Table, STT, Black-box Testing |
