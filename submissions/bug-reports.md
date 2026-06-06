@@ -23,38 +23,72 @@
 | **Date Found**  | 28/05/2026          |
 | **Status**      | Open                |
 
+
+
 ### Steps to Reproduce
 
-1. Open the system login page.
-2. Enter an invalid email format (e.g., `ngochanhiepdepzai`), enter any valid password, and click the Login button.
+ Scenario 1 (TC-07)
+
+1. Open the login page.
+2. Enter email: `librarianlibrarycom`
+3. Enter any password.
+4. Click **Login**.
+
+ Scenario 2 (TC-08)
+
+1. Open the login page.
+2. Enter email: `librarianlibrary.com`
+3. Enter password: `admin123`
+4. Click **Login**.
+
+ Scenario 3 (TC-09)
+
+1. Open the login page.
+2. Enter email: `librarian@librarycom`
+3. Enter password: `admin123`
+4. Click **Login**.
 
 ### Expected Result
 
-* The system should validate the email format before checking the database.
-* Display the message: **"Invalid email format"**.
+For all invalid email formats:
+
+* The system should validate the email format before sending a request to the server or querying the database.
+* The system should display an error message such as:
+
+  * **"Invalid email format"**
+  * or **"Email is invalid"**
+* The login process should be stopped until a valid email format is entered.
 
 ### Actual Result
 
-The system displays the message: **"Member not found"**.
+For all three scenarios, the system displays:
+
+**"Member not found"**
+
+instead of indicating that the email format is invalid.
 
 ### Impact
 
-This may confuse users. They may think the email has not been registered in the system or believe that they did not enter an email, even though they entered one with an incorrect format.
+* Users may believe that the account does not exist rather than understanding that the email format is incorrect.
+* The error message is misleading and does not help users identify the actual input problem.
+* The system performs unnecessary account lookup operations before validating user input.
 
 ### Evidence
+![BUG-01](images/REQ-01/BUG-01.1.png)
+![BUG-01](images/REQ-01/BUG-01.2.png)
+![BUG-01](images/REQ-01/BUG-01.3.png)
 
-![BUG-01.1](images/REQ-01/BUG-01.1.png)
-
-![BUG-01.2](images/REQ-01/BUG-01.2.png)
-
-![BUG-01.3](images/REQ-01/BUG-01.3.png)
 
 ### Proposed Fix
 
-* Add email format validation before searching for the account in the database.
-* Use a standard email validation regex or a suitable validation library.
-* When the email format is invalid, stop the login process and display the message: **"Invalid email format"**.
-* Only check whether the account exists after the email format has been validated.
+* Implement client-side and/or server-side email format validation before checking account existence.
+* Use a standard email validation regex or a trusted validation library.
+* When the email format is invalid:
+
+  * Stop the login process immediately.
+  * Display the message **"Invalid email format"** (or the system-standard validation message).
+* Perform database lookup only after the email format passes validation.
+
 
 ---
 
