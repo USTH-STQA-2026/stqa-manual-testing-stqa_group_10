@@ -10,7 +10,7 @@
 | **Reference** | SRS v1.0 |
 
 
-### IDM - REQ-01: Login 1/3
+### IDM - REQ-01: Login 
 
 | Feature | Partition | Representative value | Expected result |
 |---|---|---|---|
@@ -96,7 +96,7 @@
 
 ---
 
-### IDM - REQ-07: Manage Members (Add New) (1 c,p,)
+### IDM - REQ-07: Manage Members (Add New) 
 
 | Feature | Partition | Representative value | Expected result |
 |---|---|---|---|
@@ -128,7 +128,7 @@
 
 ## Step 2: Test Cases
 
-### REQ-01
+### REQ-01 : Login
 
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
@@ -142,7 +142,7 @@
 | TC-08 | Verify the input value of email | User is not logged in | 1. Access login page.<br><br>2. Enter invalid format email.<br><br>3. Enter any password.<br><br>4. Click Login. | 1. Email: librarianlibrary.com<br><br>2. Password: admin123 | System displays error message: "Email is invalid" | REQ-01 | EP |
 | TC-09 | Verify the input value of email | User is not logged in | 1. Access login page.<br><br>2. Enter invalid format email.<br><br>3. Enter any password.<br><br>4. Click Login. | 1. Email: librarian@librarycom<br><br>2. Password: admin123 | System displays error message: "Email is invalid" | REQ-01 | EP |
 
-### REQ-02 (1) 
+### REQ-02 
 
 | TC ID | Test Objective | Preconditions  | Execution Steps | Input Data | Expected Result | REQ    | Technique |
 | ----- | -----------| ---------- | ----------| --------- | -----------| ------ | -------------- |
@@ -184,7 +184,7 @@
 
 ---
 
-### REQ-05 ( 1)
+### REQ-05 
 
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
@@ -198,7 +198,7 @@
 
 ---
 
-### REQ-06 (3 cs )
+### REQ-06 
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
 | TC-34 | Check overdue books | A borrow record has `dueDate` ≤ current date | 1. Log in with Librarian account.<br><br>2. Select 'Borrow/Return' tab.<br><br>3. Click 'Check overdue books' button. | Librarian account | 1. Notification 'updated: XX' overdue books.<br><br>2. Book statuses change from 'Borrowed' to 'Overdue'. | REQ-06 | STT |
@@ -213,7 +213,9 @@
 | TC-39 | Add member with invalid email format (Has @ but missing dot .) | Logged in with Librarian role. | 1. Fill in info with email missing a dot in the domain section.<br><br>2. Click Add Member. | 1. Full Name: ngo chan hiep<br><br>2. Email: ghiep342@gmailcom<br><br>3. Phone: 0941898905 | System displays invalid email error message, registration denied. | REQ-07 | EP |
 | TC-40 | Add member with invalid email format (Missing @ but has dot .) | Logged in with Librarian role. | 1. Fill in info with email missing @ symbol but having domain dot.<br><br>2. Click Add Member. | 1. Full Name: toi ten la tao<br><br>2. Email: ghiep242.com<br><br>3. Phone: 0941898905 | System displays invalid email error message, registration denied. | REQ-07 | EP | 
 | TC-41 | Verify behavior when creating a member with an already existing email | Logged in with Librarian role. | 1. Log in as Librarian.<br><br>2. Use an email already existing on the system (dam.tran@email.com). | 1. Full Name: Ngô Chấn Hiệp<br><br>2. Email: dam.tran@email.com<br><br>3. Phone: 0941898905 | System blocks and displays duplication error message (e.g., "This email already exists"). | REQ-07 | EP |
+| TC-42 |Check that the list of valid members with the role of Librarian is displayed.| 1. The librarian's account has successfully logged in. <br><br> 2. Member data is now available in the system. | 1. Navigate to the "Member" menu.<br><br> 2. Observe the displayed list.| Empty | 1. The screen displays a list of members.<br><br> 2. All columns are displayed: Serial Number, Full Name, Email, Phone Number , Number of books currently borrowed.<br><br> 3. The data matches the database accurately.| REQ-07 | Black-box Testing |
 
+---
 
 ### REQ-08 - Borrow Receipt Lookup
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
