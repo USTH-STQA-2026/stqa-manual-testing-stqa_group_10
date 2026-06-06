@@ -10,7 +10,7 @@
 | **Reference** | SRS v1.0 |
 
 
-### IDM - REQ-01: Login
+### IDM - REQ-01: Login 1/3
 
 | Feature | Partition | Representative value | Expected result |
 |---|---|---|---|
@@ -23,7 +23,7 @@
 
 ---
 
-### IDM - REQ-02: View Book List
+### IDM - REQ-02: View Book List 4/
 
 | Feature | Partition | Representative value | Expected result |
 |---|---|---|---|
@@ -96,7 +96,7 @@
 
 ---
 
-### IDM - REQ-07: Manage Members (Add New)
+### IDM - REQ-07: Manage Members (Add New) (1 c,p,)
 
 | Feature | Partition | Representative value | Expected result |
 |---|---|---|---|
@@ -138,22 +138,23 @@
 | TC-04 | Verify error message when entering correct email but incorrect password | 1. User is not logged in.<br><br>2. Account exists in the system. | 1. Access login section of the website.<br><br>2. Enter valid email.<br><br>3. Enter incorrect password.<br><br>4. Click Login. | 1. Email: librarian@library.com<br><br>2. Password: hehe | System displays error message: "Incorrect password". | REQ-01 | EP | 
 | TC-05 | Verify login behavior when intentionally capitalizing the first letter of the email | 1. User is not logged in.<br><br>2. Account librarian@library.com exists in the system. | 1. Go to login page.<br><br>2. Enter email with capitalized first letter.<br><br>3. Enter correct password.<br><br>4. Click Login. | 1. Email: Librarian@library.com<br><br>2. Password: admin123 | System automatically converts email to lowercase, logs in successfully, and redirects to homepage. | REQ-01 | EP |
 | TC-06 | Verify the security/masking of the password input field | User is on the login page. | Type characters into the password field. | Password: admin123 | Entered characters must be masked as dots (●●●●●) or asterisks (*****). | REQ-01 | Black-box Testing |
-| TC-07 | Verify error message when email format is invalid | User is not logged in. | 1. Access login page.<br><br>2. Enter invalid format email.<br><br>3. Enter any password.<br><br>4. Click Login. | 1. Email: ngochanhiepdepzai<br><br>2. Password: any | System displays invalid email format error message and does not send request to server. | REQ-01 | EP |
+| TC-07 | Verify error message when email format is invalid | User is not logged in. | 1. Access login page.<br><br>2. Enter invalid format email.<br><br>3. Enter any password.<br><br>4. Click Login. | 1. Email: librarianlibrarycom<br><br>2. Password: any | System displays invalid email format error message and does not send request to server. | REQ-01 | EP |
+| TC-08 | Verify the input value of email | User is not logged in | 1. Access login page.<br><br>2. Enter invalid format email.<br><br>3. Enter any password.<br><br>4. Click Login. | 1. Email: librarianlibrary.com<br><br>2. Password: admin123 | System displays error message: "Email is invalid" | REQ-01 | EP |
+| TC-09 | Verify the input value of email | User is not logged in | 1. Access login page.<br><br>2. Enter invalid format email.<br><br>3. Enter any password.<br><br>4. Click Login. | 1. Email: librarian@librarycom<br><br>2. Password: admin123 | System displays error message: "Email is invalid" | REQ-01 | EP |
 
-
-### REQ-02
+### REQ-02 (1) 
 
 | TC ID | Test Objective | Preconditions  | Execution Steps | Input Data | Expected Result | REQ    | Technique |
 | ----- | -----------| ---------- | ----------| --------- | -----------| ------ | -------------- |
-| TC-08 | Verify that the librarian can view the list of all books        | 1. User is not logged in.<br><br>2. The data is in the seed data state.               | 1. Open the system https://stqa.rbc.vn.<br><br>2. Log in with the librarian account.<br><br>3. Select the Books tab.<br><br>4. Observe the displayed book list.                             | 1. Email: [librarian@library.com](mailto:librarian@library.com)<br><br>2. Password: admin123 | The system displays the list of all books in the library with complete information: book title, author, category, publication year, and status. | REQ-02 | EP             |
-| TC-09 | Verify that a member can view the list of all books             | 1. User is not logged in.<br><br>2. The data is in the seed data state.               | 1. Open the system https://stqa.rbc.vn.<br><br>2. Log in with the member account.<br><br>3. Select the Books tab.<br><br>4. Observe the displayed book list.                                | 1. Email: [ba.nguyen@email.com](mailto:ba.nguyen@email.com)<br><br>2. Password: password123  | The member can view the book list with complete information: book title, author, category, publication year, and status.  | REQ-02 | EP |
-| TC-10 | Verify that a book with Available status is displayed correctly | User has logged in successfully. | 1. Select the Books tab.<br><br>2. Find the book BOOK001 - Lập trình Flutter cơ bản.<br><br>3. Check the book status.   | Book: BOOK001    | The book displays the status Available.    | REQ-02 | EP |
-| TC-11 | Verify that a book with Borrowed status is displayed correctly  | User has logged in successfully.  | 1. Select the Books tab.<br><br>2. Find the book BOOK003 - Kiểm thử phần mềm nhập môn.<br><br>3. Check the book status. | Book: BOOK003 | The book displays the status Borrowed. | REQ-02 | EP |
-| TC-12 | Verify that the book status is updated after borrowing   | 1. Member account is active.<br><br>2. Book BOOK001 is currently in Available status. | 1. Log in with the member account.<br><br>2. Select the Books tab.<br><br>3. Borrow book BOOK001.<br><br>4. Observe the book status after borrowing. | 1. Email: [ba.nguyen@email.com](mailto:ba.nguyen@email.com)<br><br>2. Book: BOOK001          | The book status is updated from Available to Borrowed immediately after borrowing successfully.                                                 | REQ-02 | Decision Table |
-| TC-13 | Verify that the book status is updated after returning          | Member is currently borrowing book BOOK003.                                           | 1. Log in with the member account.<br><br>2. Select the Borrow / Return tab.<br><br>3. Return book BOOK003.<br><br>4. Go back to the Books tab.<br><br>5. Check the status of book BOOK003. | 1. Email: [ba.nguyen@email.com](mailto:ba.nguyen@email.com)<br><br>2. Book: BOOK003          | The book status is updated from Borrowed to Available after returning successfully. | REQ-02 | Decision Table |
-| TC-14 | Verify that the publication year is displayed in a valid format | User has logged in successfully.  | 1. Select the Books tab.<br><br>2. Observe the publication year information of the books.  | None  | The publication year of each book is displayed in a valid 4-digit number format and is not empty.   | REQ-02 | BVA |
+| TC-10 | Verify that the librarian can view the list of all books        | 1. User is not logged in.<br><br>2. The data is in the seed data state.               | 1. Open the system https://stqa.rbc.vn.<br><br>2. Log in with the librarian account.<br><br>3. Select the Books tab.<br><br>4. Observe the displayed book list.                             | 1. Email: [librarian@library.com](mailto:librarian@library.com)<br><br>2. Password: admin123 | The system displays the list of all books in the library with complete information: book title, author, category, publication year, and status. | REQ-02 | EP             |
+| TC-11 | Verify that a member can view the list of all books             | 1. User is not logged in.<br><br>2. The data is in the seed data state.               | 1. Open the system https://stqa.rbc.vn.<br><br>2. Log in with the member account.<br><br>3. Select the Books tab.<br><br>4. Observe the displayed book list.                                | 1. Email: [ba.nguyen@email.com](mailto:ba.nguyen@email.com)<br><br>2. Password: password123  | The member can view the book list with complete information: book title, author, category, publication year, and status.  | REQ-02 | EP |
+| TC-12 | Verify that a book with Available status is displayed correctly | User has logged in successfully. | 1. Select the Books tab.<br><br>2. Find the book BOOK001 - Lập trình Flutter cơ bản.<br><br>3. Check the book status.   | Book: BOOK001    | The book displays the status Available.    | REQ-02 | EP |
+| TC-13 | Verify that a book with Borrowed status is displayed correctly  | User has logged in successfully.  | 1. Select the Books tab.<br><br>2. Find the book BOOK003 - Kiểm thử phần mềm nhập môn.<br><br>3. Check the book status. | Book: BOOK003 | The book displays the status Borrowed. | REQ-02 | EP |
+| TC-14 | Verify that the book status is updated after borrowing   | 1. Member account is active.<br><br>2. Book BOOK001 is currently in Available status. | 1. Log in with the member account.<br><br>2. Select the Books tab.<br><br>3. Borrow book BOOK001.<br><br>4. Observe the book status after borrowing. | 1. Email: [ba.nguyen@email.com](mailto:ba.nguyen@email.com)<br><br>2. Book: BOOK001          | The book status is updated from Available to Borrowed immediately after borrowing successfully.                                                 | REQ-02 | Decision Table |
+| TC-15 | Verify that the book status is updated after returning          | Member is currently borrowing book BOOK003.                                           | 1. Log in with the member account.<br><br>2. Select the Borrow / Return tab.<br><br>3. Return book BOOK003.<br><br>4. Go back to the Books tab.<br><br>5. Check the status of book BOOK003. | 1. Email: [ba.nguyen@email.com](mailto:ba.nguyen@email.com)<br><br>2. Book: BOOK003          | The book status is updated from Borrowed to Available after returning successfully. | REQ-02 | Decision Table |
+| TC-16 | Verify that the publication year is displayed in a valid format | User has logged in successfully.  | 1. Select the Books tab.<br><br>2. Observe the publication year information of the books.  | None  | The publication year of each book is displayed in a valid 4-digit number format and is not empty.   | REQ-02 | BVA |
 
-### REQ-03
+### REQ-03 
 
 | TC ID | Test Objective | Preconditions   | Execution steps | Input Data | Expected Result | REQ    | Technique |
 | ----- | ------ | ------| -------| ---- | ------ | ------ | -------- |
@@ -172,33 +173,33 @@
 
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
-|TC-23|Verify successful book borrowing under limit (< 3)|Logged in as `biet.hoang@email.com` (currently has 1 active borrow)| 1. Go to "Books" tab.<br>2. Click the "+" button for an "Available" book (`"BOOK001"`) then "Borrow".<br>3. Navigate to the "Borrow / Return" tab.<br>4. Observe the newly created borrow record |`"BOOK001"`|Displays a success message. A borrow record is created with a due date set to exactly +14 days from today|REQ-04|EP(IDM: Available, Active, < 3)|
-|TC-24|Verify borrow rejection at the boundary limit (= 3)|Logged in as `ba.nguyen@email.com` (currently has 1 active borrow)| 1. Borrow `"BOOK001"` (Total = 2).<br>2. Borrow `"BOOK002"` (Total = 3).<br>3. Attempt to borrow `"BOOK005"`|`"BOOK001"`, `"BOOK002"`, `"BOOK005"`|System allows the first 2 borrows. Rejects the 3rd attempt (`"BOOK005"`) with an error message stating the limit of 3 books is reached|REQ-04|BVA(IDM: = 3)|
-|TC-25|Verify borrow rejection for "Suspended" member|Logged in as `cu.le@email.com` (Member status: Suspended)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Suspended" account status|REQ-04|DT/EP(IDM: Suspended)|
-|TC-26|Verify borrow rejection for an already "Borrowed" book|Logged in as `dam.tran@email.com`|1. Go to "Books" tab.<br>2. Search or locate `"BOOK003"` (Status: Borrowed).<br>3. Observe the book card|`"BOOK003"`|The "+" borrow button is completely hidden/disabled for this book and status is "Borrowed"|REQ-04|EP(IDM: Borrowed)|
-|TC-27|Verify borrow rejection for "Expired" member|Logged in as `binh.pham@email.com` (Member status: Expired)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Expired" account status|REQ-04|EP(IDM: Expired)|
-|TC-28|Verify borrow rejection for "Lost" book|Member `"ba.nguyen@email.com"` is logged in|1. Locate `"BOOK007"` (Status: Lost).<br>2. Observe the book card|Book: `"BOOK007"`|The "+" borrow button is completely hidden/disabled and status is "Lost"|REQ-04|EP (IDM: Lost)|
-|TC-29|Verify successful borrow at boundary limit (= 2)|Member `"ba.nguyen@email.com"` is logged in(has 1 active borrow)|1. Borrow BOOK002.<br>2. Observe system response|Book: `"BOOK002"`|System allows borrowing successfully (Total active borrows becomes exactly 2)|REQ-04|BVA (IDM: = 2)|
+|TC-23|Verify successful book borrowing under limit (< 3)|Logged in as `biet.hoang@email.com` (currently has 1 active borrow)| 1. Go to "Books" tab.<br>2. Click the "+" button for an "Available" book (`"BOOK001"`) then "Borrow".<br>3. Navigate to the "Borrow / Return" tab.<br>4. Observe the newly created borrow record |`"BOOK001"`|Displays a success message. A borrow record is created with a due date set to exactly +14 days from today|REQ-04|EP|
+|TC-24|Verify borrow rejection at the boundary limit (= 3)|Logged in as `ba.nguyen@email.com` (currently has 1 active borrow)| 1. Borrow `"BOOK001"` (Total = 2).<br>2. Borrow `"BOOK002"` (Total = 3).<br>3. Attempt to borrow `"BOOK005"`|`"BOOK001"`, `"BOOK002"`, `"BOOK005"`|System allows the first 2 borrows. Rejects the 3rd attempt (`"BOOK005"`) with an error message stating the limit of 3 books is reached|REQ-04|BVA|
+|TC-25|Verify borrow rejection for "Suspended" member|Logged in as `cu.le@email.com` (Member status: Suspended)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Suspended" account status|REQ-04|Decision Table|
+|TC-26|Verify borrow rejection for an already "Borrowed" book|Logged in as `dam.tran@email.com`|1. Go to "Books" tab.<br>2. Search or locate `"BOOK003"` (Status: Borrowed).<br>3. Observe the book card|`"BOOK003"`|The "+" borrow button is completely hidden/disabled for this book and status is "Borrowed"|REQ-04|EP|
+|TC-27|Verify borrow rejection for "Expired" member|Logged in as `binh.pham@email.com` (Member status: Expired)|1. Go to "Books" tab.<br>2. Select an "Available" book (`"BOOK001"`).<br>3. Click the"+" button then "Borrow"|`"BOOK001"`|The system rejects the request and displays a specific error message for the "Expired" account status|REQ-04|EP|
+|TC-28|Verify borrow rejection for "Lost" book|Member `"ba.nguyen@email.com"` is logged in|1. Locate `"BOOK007"` (Status: Lost).<br>2. Observe the book card|Book: `"BOOK007"`|The "+" borrow button is completely hidden/disabled and status is "Lost"|REQ-04|EP|
+|TC-29|Verify successful borrow at boundary limit (= 2)|Member `"ba.nguyen@email.com"` is logged in(has 1 active borrow)|1. Borrow BOOK002.<br>2. Observe system response|Book: `"BOOK002"`|System allows borrowing successfully (Total active borrows becomes exactly 2)|REQ-04|BVA|
 
 
 ---
 
-### REQ-05
+### REQ-05 ( 1)
 
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|----------------|---------------|-----------------|------------|-----------------|-----|-----------|
 |TC-30|Return a borrowed book on time, no overdue warning| Logged in ba.nguyen@email.com. Just borrowed BOOK001.|1.Go to tab "Borrow/Return". 2.Find BOOK001 in "My borrow records". 3. Click "Return book". Confirm if prompted |BOOK001, borrow date = today, due date = today + 14 days|1.Success message shown. 2.Record status "Returned". 3.BOOK001 status -> "Available". 4.No overdue warning|REQ-05|EP|
-|TC-31|Return an overdue book - allowed but shows overdue warning | Logged in ba.nguyen@email.com. Record BR001 exists: MEM002 borrowed BOOK003, due 15/09/2024|1.Go to "Borrow/Return" tab. 2. Find "BOOK003" in "My Borrow records". 3. Click "Return book" |Record: BR001, BOOK003, due date: 15/09/2024, return date: today  |1. Return is accepted. 2. Overdue warning is displayed. 3. BR001 status -> "Returned". 4. BOOK003 status -> "Available" |REQ-05|EP, BVA |
+|TC-31|Return an overdue book - allowed but shows overdue warning | Logged in ba.nguyen@email.com. Record BR001 exists: MEM002 borrowed BOOK003, due 15/09/2024|1.Go to "Borrow/Return" tab. 2. Find "BOOK003" in "My Borrow records". 3. Click "Return book" |Record: BR001, BOOK003, due date: 15/09/2024, return date: today  |1. Return is accepted. 2. Overdue warning is displayed. 3. BR001 status -> "Returned". 4. BOOK003 status -> "Available" |REQ-05|EP |
 |TC-32| Cannot return a book borrowed by another member |Logged in ba.nguyen@email.com. BOOK013 is borrowed by another member, not MEM002 |1. Go to "Borrow/Return" tab. 2. Find BOOK013 in "My borrow records" |Account of MEM002 but BOOK013 is borrowed by MEM006 |1. Cannot find BOOK013 in MEM002's list. 2. No "Return" button available for BOOK013. 3. System does not allow returning another member's book |REQ-05 |EP |
 |TC-33| Book status updates immediately after return| Logged in as ba.nguyen@email.com.  BOOK003 currently shows "Borrowed" in Books tab|1.Go to "Borrow/Return". 2. Find BR001 in "My borrow records". 3. Click "Return book". 4. Immediately go back to "Books" tab. 5. Find BOOK003 |Record:BR001, BOOK003 |1. Before return: BOOK003 = "Borrowed". 2. After return: BOOK003 = "Available" — updates immediately |REQ-05 |EP |
 
 ---
 
-### REQ-06
+### REQ-06 (3 cs )
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
 |-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-| TC-34 | Check overdue books | A borrow record has `dueDate` ≤ current date | 1. Log in with Librarian account.<br><br>2. Select 'Borrow/Return' tab.<br><br>3. Click 'Check overdue books' button. | Librarian account | 1. Notification 'updated: XX' overdue books.<br><br>2. Book statuses change from 'Borrowed' to 'Overdue'. | REQ-06 | BVA, STT |
-| TC-35 | Member sees their overdue receipts | A borrow record has `dueDate` ≤ current date | 1. Log in with Member account.<br><br>2. Select 'Borrow/Return' tab. | Member account | Book status for borrowed items changes from 'Borrowed' to 'Overdue' | REQ-06 | BVA, STT |
+| TC-34 | Check overdue books | A borrow record has `dueDate` ≤ current date | 1. Log in with Librarian account.<br><br>2. Select 'Borrow/Return' tab.<br><br>3. Click 'Check overdue books' button. | Librarian account | 1. Notification 'updated: XX' overdue books.<br><br>2. Book statuses change from 'Borrowed' to 'Overdue'. | REQ-06 | STT |
+| TC-35 | Member sees their overdue receipts | A borrow record has `dueDate` ≤ current date | 1. Log in with Member account.<br><br>2. Select 'Borrow/Return' tab. | Member account | Book status for borrowed items changes from 'Borrowed' to 'Overdue' | REQ-06 | STT |
 
 ### REQ-07
 | TC ID | Test Objective | Preconditions | Execution Steps | Input Data | Expected Result | REQ | Technique |
@@ -221,6 +222,13 @@
 ## Summary
 
 | Functional area | # of TCs | REQs covered | IDM techniques applied |
-|----------------|-------|---------|----------------------|
-| | | | |
-| **Total** | **<!-- ≥ 20 -->** | | |
+|----------------|------:|-------------|----------------------|
+| Login | 7 | REQ-01 | EP, BVA, Decision Table, Black-box Testing |
+| View Book List | 7 | REQ-02 | EP, Decision Table, BVA |
+| Search & Filter | 8 | REQ-03 | EP, Decision Table, BVA |
+| Borrow Book | 7 | REQ-04 | EP, BVA, Decision Table |
+| Return Book | 4 | REQ-05 | EP |
+| Overdue Handling | 2 | REQ-06 | State Transition Testing (STT) |
+| Manage Members | 6 | REQ-07 | EP, Decision Table |
+| Borrow Receipt Lookup | 2 | REQ-08 | EP |
+| **Total** | **43** | REQ-01..REQ-08 | EP, BVA, Decision Table, STT, Black-box Testing |
