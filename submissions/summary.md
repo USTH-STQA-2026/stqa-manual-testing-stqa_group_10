@@ -8,9 +8,9 @@
 
 | Mục | Thông tin |
 |-----|----------|
-| **Nhóm** | `<!-- Tên nhóm -->` |
+| **Nhóm** | `STQA Group 10` |
 | **Lớp** | `<!-- VD: SE001.P11 -->` |
-| **Ngày báo cáo** | `<!-- DD/MM/YYYY -->` |
+| **Ngày báo cáo** | `5/6/2026` |
 | **Hệ thống kiểm thử** | https://stqa.rbc.vn — v1.0 |
 
 ---
@@ -19,7 +19,7 @@
 
 | Chỉ số | Giá trị |
 |--------|---------|
-| Tổng số test case | `<!-- -->` |
+| Tổng số test case | `43` |
 | Pass | `<!-- -->` |
 | Fail | `<!-- -->` |
 | Blocked | `<!-- -->` |
@@ -31,7 +31,14 @@
 
 | Nhóm chức năng | TC | Pass | Fail | Bug | Đánh giá |
 |---------------|-----|------|------|-----|---------|
-| | | | | | |
+| Login | 7 | | | | |
+| View Book List | 7 ||||
+| Search & Filter | 7 | 
+|  Borrow Book | 9 |
+| Return Book | 4 | 
+| Overdue Handling | 2 |
+| Manage Members (Add New) | 6 |
+| Borrow Receipt Lookup | 2 |
 
 ### Phân bổ bug theo mức độ
 
