@@ -60,7 +60,6 @@ For all invalid email formats:
 * The login process should be stopped until a valid email format is entered.
 
 ### Actual Result
-
 For all three scenarios, the system displays:
 
 **"Member not found"**
@@ -100,7 +99,6 @@ instead of indicating that the email format is invalid.
 | **Related TC**  | TC-08, TC-11              |
 | **Related REQ** | REQ-07                    |
 | **Severity**    | High                      |
-| **Reported By** | Ngo Chan Hiep - 23BA14102 |
 | **Date Found**  | 29/05/2026                |
 | **Status**      | Open                      |
 
@@ -137,7 +135,6 @@ instead of indicating that the email format is invalid.
 2. Case 2: The system should block the request and display the message: **"Invalid email"**.
 
 ### Actual Result
-
 1. Case 1: The system blocks the request and displays **"Invalid email"**.
 2. Case 2: The system successfully creates a new member with the invalid email `ghiep342@gmailcom`.
 
@@ -415,7 +412,7 @@ Users cannot filter books by category even though valid categories are available
 | **TC liên quan** | TC-02 |
 | **REQ liên quan** | REQ-04 |
 | **Mức độ** | **High** — Violates core business rules by allowing members to borrow books beyond the maximum limit, leading to system inventory discrepancies|
-| **Người phát hiện** | Nguyễn Văn Hoàng 23BA14122 |
+| **Người phát hiện** | Nguyễn Văn Hoàng - 23BA14122 |
 | **Ngày phát hiện** | 05/06/2026 |
 | **Trạng thái** | Open |
 
@@ -437,8 +434,8 @@ System allows member to borrow 4 books concurrently (Off-by-one boundary error o
 
 **Bước tái hiện:**
 1. Navigate to the "Books" tab.
-2. Click the `(+)` button to borrow book `BOOK002` (Total active borrows = 2).
-3. Click the `(+)` button to borrow book `BOOK004` (Total active borrows = 3).
+2. Click the `(+)` button to borrow book `BOOK001` (Total active borrows = 2).
+3. Click the `(+)` button to borrow book `BOOK002` (Total active borrows = 3).
 4. Attempt to borrow a 4th book (`BOOK005`) by clicking its `(+)` button.
 
 
@@ -512,7 +509,7 @@ The system mismaps and misidentifies the user state workflow. It misleads suspen
 
 
 **Minh chứng:**
-![Bug 09 Evidence](images/BUG_09.png)
+![Bug 09 Evidence](images/REQ-04/BUG-09.png)
 
 
 **Đề xuất xử lý:**
