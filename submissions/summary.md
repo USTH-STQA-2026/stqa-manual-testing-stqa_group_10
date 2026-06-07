@@ -1,100 +1,103 @@
-# Test Summary — Báo cáo tổng hợp kiểm thử
+# Test Summary — Test Summary Report
 
-> **Hướng dẫn**: Đây là hoạt động **Quality Assurance** — bạn đánh giá chất lượng tổng thể của phần mềm, không chỉ liệt kê lỗi.
-
----
-
-## 1. Thông tin nhóm
-
-| Mục | Thông tin |
-|-----|----------|
-| **Nhóm** | `STQA Group 10` |
-| **Lớp** | `<!-- VD: SE001.P11 -->` |
-| **Ngày báo cáo** | `5/6/2026` |
-| **Hệ thống kiểm thử** | https://stqa.rbc.vn — v1.0 |
+> **Note**: This is a Quality Assurance summary — focus on overall software quality, not only defect lists.
 
 ---
 
-## 2. Tổng quan kết quả
+## 1. Team information
 
-| Chỉ số | Giá trị |
-|--------|---------|
-| Tổng số test case | `43` |
-| Pass | `<!-- -->` |
-| Fail | `<!-- -->` |
-| Blocked | `<!-- -->` |
-| Not Run | `<!-- -->` |
-| **Tỷ lệ Pass** | `<!-- xx% -->` |
-| **Số bug phát hiện** | `<!-- -->` |
+| Item | Detail |
+|------|--------|
+| **Team** | `STQA Group 10` |
+| **Class** | `<!-- e.g. SE001.P11 -->` |
+| **Report date** | `07/06/2026` |
+| **Tested system** | https://stqa.rbc.vn — v1.0 |
 
-### Phân bổ theo nhóm chức năng
+---
 
-| Nhóm chức năng | TC | Pass | Fail | Bug | Đánh giá |
-|---------------|-----|------|------|-----|---------|
-| Login | 7 | | | | |
-| View Book List | 7 ||||
-| Search & Filter | 7 | 
-|  Borrow Book | 9 |
-| Return Book | 4 | 
-| Overdue Handling | 2 |
-| Manage Members (Add New) | 6 |
-| Borrow Receipt Lookup | 2 |
+## 2. Overall results
 
-### Phân bổ bug theo mức độ
+| Metric | Value |
+|--------|-------|
+| Total test cases | `47` |
+| Pass | `21` |
+| Fail | `11` |
+| Blocked | `0` |
+| Not Run | `15` |
+| **Pass rate** | `44.68%` |
+| **Bugs found** | `7` |
 
-| Mức độ | Số lượng | Bug IDs |
-|--------|---------|---------|
+### Distribution by functional area
+
+| Functional area | # TC | Pass | Fail | Blocked | Notes |
+|-----------------|-----:|------|------|---------|-------|
+| Login | 9 | 5 | 4 | 0 | Pass rate: 55.56% |
+| View Book List | 7 | 0 | 0 | 7 | Pass rate: 0% (not executed) |
+| Search & Filter | 8 | 0 | 0 | 8 | Pass rate: 0% (not executed) |
+| Borrow Book | 6 | 4 | 2 | 0 | Pass rate: 66.67% |
+| Return Book | 6 | 5 | 1 | 0 | Pass rate: 83.33% |
+| Overdue Handling | 2 | 2 | 0 | 0 | Pass rate: 100% |
+| Manage Members (Add New) | 7 | 3 | 4 | 0 | Pass rate: 42.86% |
+| Borrow Receipt Lookup | 2 | 2 | 0 | 0 | Pass rate: 100% |
+
+### Bugs by severity
+
+| Severity | Count | Bug IDs |
+|---------|------:|---------|
 | High | | |
 | Medium | | |
 | Low | | |
 
+**Bugs found (IDs)**: BUG-01, BUG-02, BUG-03, BUG-04, BUG-08, BUG-09, BUG-10 (7 total)
+
 ---
 
-## 3. Kỹ thuật thiết kế đã sử dụng
+## 3. Design techniques applied (IDM / test design)
 
-| Kỹ thuật | Áp dụng cho REQ nào? | Số TC sử dụng | Giải thích cách áp dụng |
-|----------|---------------------|---------------|------------------------|
+| Technique | Applied to REQs | # of TCs (approx) | Notes |
+|-----------|------------------|------------------:|-------|
+| Equivalence Partitioning (EP) | REQ-01, REQ-02, REQ-03, REQ-04, REQ-07, REQ-08 | ~40 | Widely used for positive/negative input partitions |
+| Boundary Value Analysis (BVA) | REQ-01, REQ-02, REQ-03, REQ-04 | ~10 | Applied to numeric/date and input length boundaries |
+| Decision Table | REQ-01, REQ-02, REQ-03, REQ-04, REQ-07 | ~12 | Used for combinations of business rules and roles |
+| State Transition Testing (STT) | REQ-06 | 2 | Used for overdue state transitions (Borrowed → Overdue) |
+| Black-box Testing | REQ-01, REQ-07 | ~9 | Exploratory / behavior validation |
+
+---
+
+## 4. Quality analysis
+
+### 4.1 Strengths
+`<!-- list functional areas that work well (observed from test cases) -->`
+
+### 4.2 Weaknesses
+`<!-- list critical issues or frequent failures -->`
+
+---
+
+## 5. Priority recommendations for fixes
+
+> Clarify prioritization criteria: use severity (technical impact) and/or business priority.
+
+| Priority | Bug | Severity | Rationale |
+|---------:|-----|---------:|-----------|
 | | | | |
 
 ---
 
-## 4. Phân tích chất lượng phần mềm
+## 6. Conclusion
 
-### 4.1. Điểm mạnh
-`<!-- Liệt kê các chức năng hoạt động tốt -->`
-
-### 4.2. Điểm yếu
-`<!-- Liệt kê các vấn đề nghiêm trọng -->`
+`<!-- Overall assessment: Is the system ready for release? Why / why not? -->`
 
 ---
 
-## 5. Đề xuất ưu tiên sửa lỗi
+## 7. Lessons learned (optional)
 
-> 💡 Đây là phần **Quality Assurance**: bạn không chỉ tìm lỗi mà còn **đề xuất thứ tự ưu tiên** sửa chữa và đánh giá tác động.
-> Nêu rõ tiêu chí ưu tiên: dựa vào **severity** (mức độ nghiêm trọng kỹ thuật) và/hoặc **priority** (mức độ ưu tiên kinh doanh).
-
-| Thứ tự | Bug | Mức độ | Lý do ưu tiên |
-|--------|-----|--------|---------------|
-| | | | |
+`<!-- What the team learned from testing -->`
 
 ---
 
-## 6. Kết luận
+## 8. AI usage declaration (optional)
 
-`<!-- Đánh giá tổng thể: Hệ thống có sẵn sàng phát hành không? Tại sao? -->`
-
----
-
-## 7. Bài học rút ra (Tùy chọn)
-
-`<!-- Nhóm bạn học được gì từ quá trình kiểm thử này? -->`
-
----
-
-## 8. Khai báo sử dụng AI (Tùy chọn)
-
-> Nếu nhóm có sử dụng công cụ AI (ChatGPT, Copilot, Gemini...), hãy ghi rõ bên dưới. Khai báo trung thực **không ảnh hưởng điểm** — đây là kỹ năng minh bạch trong nghề.
-
-| Công cụ AI | Dùng cho phần nào | Bạn đã kiểm tra/chỉnh sửa thế nào |
-|------------|-------------------|-----------------------------------|
+| AI tool | Used for | How reviewed/edited |
+|--------|----------|--------------------|
 | | | |
