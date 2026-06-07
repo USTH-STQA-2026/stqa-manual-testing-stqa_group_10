@@ -14,27 +14,40 @@
 
 ## Kết quả chi tiết
 ### REQ-01: Login
-| Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
-|-------|---------------|---------------------------|-----------------|---------|-----------|----| 
-| TC-01 | Login | 1. Redirect to homepage successfully.<br><br>2. App bar correctly displays admin information | 1. Redirect to homepage successfully.<br><br>2. App bar correctly displays user name and role: Nguyễn Thủ Thư (Librarian). | Pass | ![TC-01](./images/REQ-01/TC-01.png)| |
-| TC-02 | Login | System displays error message | System displays error message: "Please enter email and password" | Pass | ![TC-02](./images/REQ-01/TC-02.png) | |
-| TC-03 | Login | System blocks login and displays an error message | System displays error message: "Please enter email and password" | Pass | ![TC-03](./images/REQ-01/TC-03.png) | |
-| TC-04 | Login | System displays error message: "Incorrect password" | System displays error message: "Incorrect password" | Pass | ![TC-04](./images/REQ-01/TC-04.png) | |
-| TC-05 | Login | Login failed | System displays error message: "Not find member" | Failed | ![TC-05](./images/REQ-01/TC-05.png) | |
-| TC-06 | Login | Password is hidden by "*" or other symbols | Password is hidden by dots | Pass | ![TC-06](./images/REQ-01/TC-06.png) | |
-| TC-07 | Login | System displays "Email or password is invalid" | System displays "Can not find member" | Failed | ![TC-06](./images/REQ-01/BUG-01.1.png) | BUG-01 |
-| TC-08 | Login | System displays "Email or password is invalid" | System displays "Can not find member" | Failed | ![TC-07](./images/REQ-01/BUG-01.2.png) | BUG-01 |
-| TC-09 | Login | System displays "Email or password is invalid" | System displays "Can not find member" | Failed | ![TC-08](./images/REQ-01/BUG-01.3.png) | BUG-01 |
+| TC ID | Functional group | Expected result (summary) | Actual result | Conclusion | Evidence | Bug |
+|-------|------------------|---------------------------|-----------------|---------|-----------|----| 
+| TC-01 | Login | 1. Redirect to homepage successfully.<br><br>2. App bar correctly displays user name and role. | 1. Redirect to homepage successfully.<br><br>2. App bar correctly displays user name and role: Nguyễn Thủ Thư (Librarian). | Pass | ![TC-01](./images/REQ-01/TC-01.png)| |
+| TC-02 | Login | System displays error message when both fields are blank | System displays error message: "Please enter email and password" | Pass | ![TC-02](./images/REQ-01/TC-02.png) | |
+| TC-03 | Login | System blocks login and displays an error message when password is blank | System displays error message: "Please enter email and password" | Pass | ![TC-03](./images/REQ-01/TC-03.png) | |
+| TC-04 | Login | System displays error message: "Incorrect password" when password is incorrect | System displays error message: "Incorrect password" | Pass | ![TC-04](./images/REQ-01/TC-04.png) | |
+| TC-05 | Login | Email case-insensitivity: normalization to lowercase and successful login | System displays error message: "Not find member" | Fail | ![TC-05](./images/REQ-01/TC-05.png) | |
+| TC-06 | Login | Password input is masked (dots or asterisks) | Password is hidden by dots | Pass | ![TC-06](./images/REQ-01/TC-06.png) | |
+| TC-07 | Login | Invalid email format: client-side validation prevents submission | System displays "Can not find member" | Fail | ![TC-06](./images/REQ-01/BUG-01.1.png) | BUG-01 |
+| TC-08 | Login | Invalid email format: client-side validation shows "Email is invalid" | System displays "Can not find member" | Fail | ![TC-07](./images/REQ-01/BUG-01.2.png) | BUG-01 |
+| TC-09 | Login | Invalid email format: client-side validation shows "Email is invalid" | System displays "Can not find member" | Fail | ![BUG-01](./images/REQ-01/BUG-01.3.png) | BUG-01 |
 
-### REQ-2
-| Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
-|-------|---------------|---------------------------|-----------------|---------|-----------|----| 
-| TC-10 | View Book List | 
+### REQ-02: View Book List
+| TC ID | Functional group | Expected result (summary) | Actual result | Conclusion | Evidence | Bug |
+|-------|------------------|---------------------------|---------------|-----------|----------|-----| 
+| TC-10 | View Book List | The system displays the list of all books in the library with complete information: title, author, category, publication year, book code, and status. | List of all book with full information | Pass | ![TC-10](./images/REQ-02/TC-10.png) |  |
+| TC-11 | View Book List | Member can view the list of all books with complete information: title, author, category, year, code, status. | List of all book with full information | Pass | ![TC-11](./images/REQ-02/TC-11.png) |  |
+| TC-12 | View Book List | A book with status "Available" is displayed correctly (e.g., BOOK001 shows "Available"). | Book code "BOOK001" is "available" | Pass | ![TC-12](./images/REQ-02/TC-12.png) |  |
+| TC-13 | View Book List | A book with status "Borrowed" is displayed correctly (e.g., BOOK003 shows "Borrowed"). | "BOOK03" show "Borrowed" | Pass | ![TC-13](./images/REQ-02/TC-13.png) |  |
+| TC-14 | View Book List | After borrowing a book, its status updates immediately from "Available" to "Borrowed". | "BOOK001" show "borrowed" | Pass | ![TC-14](./images/REQ-02/TC-14.1.png) ![TC-14](./images/REQ-02/TC-14.1.png) |  |
+| TC-15 | View Book List | After returning a book, its status updates immediately from "Borrowed" to "Available". | "BOOK003" show "available" | Pass | ![TC-15](./images/REQ-02/TC-15.png) |  |
+| TC-16 | View Book List | Publication year is shown in a valid 4-digit format and is not empty for every book. | No year display invalid | Pass | ![TC-16](./images/REQ-02/TC-16.png) |  |
 
-### REQ-3
-| Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
-|-------|---------------|---------------------------|-----------------|---------|-----------|----| 
-
+### REQ-03: Search & Filter
+| TC ID | Functional group | Expected result (summary) | Actual result | Conclusion | Evidence | Bug |
+|-------|------------------|---------------------------|---------------|-----------|----------|-----| 
+| TC-17 | Search & Filter | Search by valid book title (e.g., "Flutter") returns books whose titles contain the keyword. | display all book have 'Flutter' in title | Pass | ![TC-17](./images/REQ-03/TC-17.png) |  |
+| TC-18 | Search & Filter | Search using lowercase keyword ("flutter") still returns matching books (case-insensitive). | display all book have 'flutter' in title | Pass | ![TC-18](./images/REQ-03/TC-18.png) |  |
+| TC-19 | Search & Filter | Search using uppercase keyword ("FLUTTER") returns matching books (case-insensitive). | display all book have 'FLUTTER' in title | pass | ![TC-19](./images/REQ-03/TC-19.png) |  |
+| TC-20 | Search & Filter | Search by author name (e.g., "Nguyễn Minh Đức") returns books by that author. | display all book that have author is "Nguyễn Minh Đức" | Pass | ![TC-20](./images/REQ-03/TC-20.png) |  |
+| TC-21 | Search & Filter | Searching with a non-existing keyword ("XYZ123") shows "No books found". | Display "No books found" in the center screen | Pass | ![TC-21](./images/REQ-03/TC-21.png) |  |
+| TC-22 | Search & Filter | Combine category filter and keyword: matching results shown when both match. |  |  |  |  |
+| TC-23 | Search & Filter | Combine category filter and keyword: show "No books found" when there is no match. |  |  |  |  |
+| TC-24 | Search & Filter | Minimum search keyword length boundary: single-character search returns matching results if available. |  |  |  |  |
 
 ### REQ-4 Borrow Book
 | Mã TC | Nhóm chức năng | Kết quả mong đợi (tóm tắt) | Kết quả thực tế | Kết luận | Minh chứng | Bug |
