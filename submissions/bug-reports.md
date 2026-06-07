@@ -409,7 +409,7 @@ Users cannot filter books by category even though valid categories are available
 | Thuộc tính | Chi tiết |
 |-----------|---------|
 | **Mã lỗi** | BUG-08 |
-| **TC liên quan** | TC-02 |
+| **TC liên quan** | TC-26 |
 | **REQ liên quan** | REQ-04 |
 | **Mức độ** | **High** — Violates core business rules by allowing members to borrow books beyond the maximum limit, leading to system inventory discrepancies|
 | **Người phát hiện** | Nguyễn Văn Hoàng - 23BA14122 |
@@ -452,7 +452,7 @@ Allows users to bypass the business rule constraint. If deployed to production, 
 
 
 **Minh chứng:**
-![Bug 08 Evidence](images/BUG_08.png)
+![Bug 08 Evidence](images/REQ-04/BUG_08.png)
 
 
 **Đề xuất xử lý:**
@@ -468,7 +468,7 @@ Verify the comparison operator inside the active borrows validation logic. Ensur
 | Thuộc tính | Chi tiết |
 |-----------|---------|
 | **Mã lỗi** | BUG-09 |
-| **TC liên quan** | TC-03 |
+| **TC liên quan** | TC-27 |
 | **REQ liên quan** | REQ-04 |
 | **Mức độ** | **High** — System misidentifies user core account state and displays an incorrect, misleading error message during the core workflow |
 | **Người phát hiện** | Nguyễn Văn Hoàng 23BA14122 |
@@ -509,9 +509,67 @@ The system mismaps and misidentifies the user state workflow. It misleads suspen
 
 
 **Minh chứng:**
-![Bug 09 Evidence](images/REQ-04/BUG-09.png)
+![Bug 09 Evidence](images/REQ-04/BUG_09.png)
 
 
 **Đề xuất xử lý:**
 Check the error handling logic or the conditional flow (`switch/case` or `if/else`) that validates member status during the borrow process. Ensure that the error code returned for a `Suspended` account maps to its correct UI string instead of falling back to the `Expired` account message string.
 ---
+
+## BUG-10
+
+
+| **Attribute**   | Details                |
+| --------------- | ---------------------- |
+| **BUG ID**      | `BUG-10`               |
+| **Related ID**  | `TC-35`                |
+| **Related Req** | `REQ-05`               |
+| **Severity**    | `High`                 |
+| **Reporter**    | `Nguyễn Văn Hoàng` |
+| **Date Found**  | `07/06/2026`           |
+| **Status**      | `Open`                 |
+
+
+**Title:**
+`Do not display overdue book return warnings when returns are overdue`
+
+
+**Enviroment:**
+
+
+- Browser: Chrome `Version 149.0.7827.54`
+- OS: `Window 11`
+- UI Language: `English & Vietnammese`
+
+
+**Prerequisites:**
+`Account successfully logged in, at least one book is overdue for return in the borrowing list`
+
+
+**Steps to Reproduce:**
+
+
+1. `Step 1: Log in to your account successfully`
+2. `Step 2: Go to the "Borrowed Books" section`
+3. `Step 3: Confirm that there are books that are overdue. Click "Return Book" on that overdue book`
+4. `Step 4: Confirm returning the book`
+
+
+**Expected Result:**
+`After returning, the system must display a warning notification like "Book is overdue by X days, you may be fined" so users are aware`
+
+
+**Actual Result:**
+`The book return process is normal; no warnings or penalty notices are displayed`
+
+
+**Impact:**
+`Users are unaware of being fined, leading to surprise and complaints. Librarians have no basis to notify them of the fine because the system doesn't record it. This affects the transparency of the library system`
+
+
+**Evidence:**
+![BUG-10](./images/REG-05/BUG_10.png)
+
+
+**Proposed Solution:**
+`Add a warning popup before confirming overdue book returns, displaying the number of days late and the corresponding penalty fee. The backend should also calculate and return the penalty fee information along with the response for overdue book returns, and save the penalty history to the database for librarians to review`
