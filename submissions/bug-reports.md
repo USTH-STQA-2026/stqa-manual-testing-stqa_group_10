@@ -289,20 +289,17 @@ This negatively affects the user experience (UX). Users must repeatedly click th
 
 
 ---
-## BUG-06
+## BUG-06: Search function does not support Vietnamese keywords without accents
 
 | Attribute           | Details                |
 | ------------------- | ---------------------- |
 | **Bug ID**          | BUG-06                 |
-| **Related TC**      | TC-08                  |
+| **Related TC**      | TC-19                  |
 | **Related REQ**     | REQ-03                 |
 | **Severity**        | Medium                 |
 | **Reporter**        | Lê Đắc Duy - 23BA14084 |
 | **Date Discovered** | 02/06/2026             |
 | **Status**          | Open                   |
-
-**Title:**
-Search function does not support Vietnamese keywords without accents
 
 **Environment:**
 
@@ -345,20 +342,17 @@ This reduces search usability for Vietnamese users. Many users may type Vietname
 
 ---
 
-## BUG-07
+## BUG-07: Category filter does not return books when entering a valid category keyword
 
 | Attribute           | Details                |
 | ------------------- | ---------------------- |
 | **Bug ID**          | BUG-07                 |
-| **Related TC**      | TC-13, TC-14           |
+| **Related TC**      | TC-23                  |
 | **Related REQ**     | REQ-03                 |
 | **Severity**        | Medium                 |
 | **Reporter**        | Lê Đắc Duy - 23BA14084 |
 | **Date Discovered** | 02/06/2026             |
 | **Status**          | Open                   |
-
-**Title:**
-Category filter does not return books when entering a valid category keyword
 
 **Environment:**
 
