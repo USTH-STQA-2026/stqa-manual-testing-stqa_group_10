@@ -289,17 +289,20 @@ This negatively affects the user experience (UX). Users must repeatedly click th
 
 
 ---
-## BUG-06: Search function does not support Vietnamese keywords without accents
+## BUG-05: Search keyword is ignored when category is selected before searching
 
 | Attribute           | Details                |
 | ------------------- | ---------------------- |
-| **Bug ID**          | BUG-06                 |
-| **Related TC**      | TC-19                  |
+| **Bug ID**          | BUG-05                 |
+| **Related TC**      | TC-23, TC-27           |
 | **Related REQ**     | REQ-03                 |
 | **Severity**        | Medium                 |
 | **Reporter**        | Lê Đắc Duy - 23BA14084 |
 | **Date Discovered** | 02/06/2026             |
 | **Status**          | Open                   |
+
+**Title:**
+Search keyword is ignored when the user selects category before entering the search keyword
 
 **Environment:**
 
@@ -308,92 +311,64 @@ This negatively affects the user experience (UX). Users must repeatedly click th
 * Interface Language: Vietnamese
 
 **Prerequisites:**
-The user has logged in successfully and is currently on the `Books` tab. The book list contains Vietnamese book titles with accents, such as `Lập trình Flutter cơ bản` or `Kiểm thử phần mềm nhập môn`.
+
+* The user has logged in successfully.
+* The user is currently on the `Books` tab.
+* The system has the category `Công nghệ`.
+* The book list contains books in the `Công nghệ` category, including `Nhập môn lập trình Python`.
 
 **Reproduction Steps:**
 
-1. Access the system website: https://stqa.rbc.vn.
-2. Log in with a valid account.
-3. Open the `Books` tab.
-4. Enter a Vietnamese keyword without accents, such as `lap trinh`, in the search box.
-5. Observe the displayed result.
-6. Clear the search box.
-7. Enter another keyword without accents, such as `kiem thu` or `nhap mon`.
-8. Observe the displayed result again.
+**Case 1: Search first, then select category**
+
+1. Enter the keyword `Python` in the search box.
+2. Select the category `Công nghệ`.
+3. Observe the displayed book list.
+
+**Case 2: Select category first, then search**
+
+1. Clear the search box and category filter.
+2. Select the category `Công nghệ`.
+3. Enter the keyword `Python` in the search box.
+4. Observe the displayed book list.
 
 **Expected Result:**
-The system should return matching books even when the user enters Vietnamese keywords without accents. For example, searching `lap trinh` should still find books containing `Lập trình`.
+
+In both cases, the system should display the same result list.
+
+The displayed books must satisfy both conditions:
+
+* The book belongs to the `Công nghệ` category.
+* The book title or author contains the keyword `Python`.
+
+For example, the system should only display the book `Nhập môn lập trình Python`.
 
 **Actual Result:**
-The system does not display any matching books when the Vietnamese keyword is entered without accents.
+
+* In Case 1, when the user enters `Python` first and then selects `Công nghệ`, the system displays the correct result: only `Nhập môn lập trình Python`.
+* In Case 2, when the user selects `Công nghệ` first and then enters `Python`, the system displays all books in the `Công nghệ` category, including books that do not contain the keyword `Python`.
 
 **Impact:**
-This reduces search usability for Vietnamese users. Many users may type Vietnamese keywords without accents, but the system cannot find existing books even though the books are available in the list.
+
+The Search & Filter function gives inconsistent results depending on the input order. Users may receive unrelated books when they select a category before entering a search keyword, making the filter feature unreliable.
 
 **Evidence:**
-![BUG-06](images/BUG-06.png)
+
+![BUG-05 Case 1](images/REQ-03/TC-23.png)
+
+![BUG-05 Case 2](images/REQ-03/TC-27.png)
 
 **Proposed Fix:**
 
-* Normalize Vietnamese text before searching.
-* Remove accents from both the search keyword and book title/author before comparison.
-* Support accent-insensitive search so that `lap trinh` can match `Lập trình`.
-* Add test cases for searching Vietnamese book titles with and without accents.
+* Recalculate the book list whenever either the search keyword or category filter changes.
+* Apply both search keyword and category filter together using AND logic.
+* Ensure the result is consistent regardless of input order:
 
----
+  * Search keyword first, then category.
+  * Category first, then search keyword.
+* Add regression tests for both input orders.
 
-## BUG-07: Category filter does not return books when entering a valid category keyword
 
-| Attribute           | Details                |
-| ------------------- | ---------------------- |
-| **Bug ID**          | BUG-07                 |
-| **Related TC**      | TC-23                  |
-| **Related REQ**     | REQ-03                 |
-| **Severity**        | Medium                 |
-| **Reporter**        | Lê Đắc Duy - 23BA14084 |
-| **Date Discovered** | 02/06/2026             |
-| **Status**          | Open                   |
-
-**Environment:**
-
-* Browser: Chrome
-* OS: Windows 11
-* Interface Language: Vietnamese
-
-**Prerequisites:**
-The user has logged in successfully and is currently on the `Books` tab. The system displays available categories such as `Công nghệ`, `Giáo dục`, `Kinh tế`, `Kỹ năng mềm`, `Quản trị`, and `Văn học`.
-
-**Reproduction Steps:**
-
-1. Access the system website: https://stqa.rbc.vn.
-2. Log in with a valid account.
-3. Open the `Books` tab.
-4. Click the category filter field.
-5. Enter a valid category keyword such as `Công`.
-6. Observe the displayed book list.
-7. Clear the category filter field.
-8. Enter another valid category keyword such as `Kinh`, `Văn`, or `Giáo`.
-9. Observe the displayed book list again.
-
-**Expected Result:**
-The system should display books that belong to the matching category. For example, entering `Công` should display books in the `Công nghệ` category, and entering `Kinh` should display books in the `Kinh tế` category.
-
-**Actual Result:**
-The system does not display any books when entering valid category keywords in the category filter field.
-
-**Impact:**
-Users cannot filter books by category even though valid categories are available. This makes the category filter function ineffective and does not meet the search/filter requirement.
-
-**Evidence:**
-![BUG-07](images/BUG-07.png)
-
-**Proposed Fix:**
-
-* Update the category filter logic to compare user input with available category names.
-* Support partial matching for valid category keywords.
-* Normalize Vietnamese text and letter case before filtering.
-* Ensure books are displayed when the entered keyword matches an existing category.
-* Add test cases for valid category keywords such as `Công`, `Kinh`, `Văn`, and `Giáo`.
 
 ---
 
