@@ -134,7 +134,7 @@ This violates a core business rule for email validation. Users who enter correct
 | Attribute       | Details                   |
 | --------------- | ------------------------- |
 | **Bug ID** | BUG-03                    |
-| **Related TC** | TC-41, TC-47              |
+| **Related TC** | TC-42, TC-47              |
 | **Related REQ** | REQ-07                    |
 | **Severity** | High                      |
 | **Reported By** | Ngo Chan Hiep             |
@@ -186,7 +186,7 @@ This violates the business requirement for error messages. The incorrect message
 | Attribute       | Details       |
 | --------------- | ------------- |
 | **Bug ID** | BUG-04        |
-| **Related TC** | TC-43         |
+| **Related TC** | TC-44         |
 | **Related REQ** | REQ-07        |
 | **Severity** | Low           |
 | **Reported By** | Ngo Chan Hiep |
