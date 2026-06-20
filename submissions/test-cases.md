@@ -74,6 +74,27 @@
 | | | | | | | | |
 
 ---
+<!-- Phía trên là bảng mẫu, thành viên không được viết thẳng vào đó, mà phải copy và paste lại đúng vị trí REQ mà mình được giao -->
+
+### REQ-01
+``
+<!-- Dưới đây là vị trí để viết bảng. Lưu ý: Bảng phải đúng theo như format bên trên, nếu muốn xuống dòng, sử dụng tag <br> giữa vị trí cần enter -->
+
+### REQ-02
+``
+### REQ-03
+``
+### REQ-04
+``
+### REQ-05
+``
+### REQ-06
+``
+### REQ-07
+``
+### REQ-08
+``
+
 
 ## Tổng hợp
 
